@@ -1,89 +1,97 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://Estyn.github.io/atom.xml" rel="self"/>
-  <link href="http://Estyn.github.io/"/>
-  <updated>2013-12-13T09:33:42+00:00</updated>
-  <id>http://Estyn.github.io/</id>
-  <author>
-    <name><![CDATA[Your Name]]></name>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Azure Dev Machine Auto Shutdown Part 2 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="In Part 1 we looked at how to set-up a simple script to shut down an azure virtual machine after a period of inactivity. The problem I had with the &hellip;">
+  <meta name="keywords" content="azure, development,Twillio,Virtual Machine,VM,PowerShell">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Estyn.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+      <h1 class="entry-title">Azure Dev Machine Auto Shutdown Part 2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-  <entry>
-    <title type="html"><![CDATA[Better Logging in Azure Mobile Services]]></title>
-    <link href="http://Estyn.github.io/blog/2013/12/12/better-logging-in-azure-mobile-services/"/>
-    <updated>2013-12-12T11:38:00+00:00</updated>
-    <id>http://Estyn.github.io/blog/2013/12/12/better-logging-in-azure-mobile-services</id>
-    <content type="html"><![CDATA[<p>Debugging in azure mobile services can be frustrating,  it only runs on Azure servers and you can&rsquo;t run any debugging tools on it.  Logging is pretty much the only way to debug your services. The default logging using console.log is fairly limited.  You can&rsquo;t turn it on or off easily or change the logging level. It also doesn&rsquo;t include the line number which can make it harder to debug a large service.
- <!-- more --></p>
 
-<h2>Installing Tracer</h2>
 
-<p>Fortunately there are some excellent node modules for logging that work fairly well with Azure Mobile Services. I&rsquo;m using the excellent <a href="https://github.com/baryon/tracer">tracer</a> module.</p>
+<time datetime="2013-09-06T01:47:00+00:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
 
-<p>Installing the module is fairly straight forward, you will first need to <a href="http://www.windowsazure.com/en-us/develop/mobile/tutorials/store-scripts-in-source-control/">setup git access</a>. You then need to install the trace module.</p>
 
-<pre><code>npm install tracer
-</code></pre>
-
-<p>Once you have the the module installed you can use it in your scripts.</p>
-
-<pre><code>var logger = require('tracer').console();
-logger.log('hello');
-logger.trace('hello', 'world');
-logger.debug('hello %s',  'world', 123);
-logger.info('hello %s %d',  'world', 123, {foo:'bar'});
-logger.warn('hello %s %d %j', 'world', 123, {foo:'bar'});
-logger.error('hello %s %d %j', 'world', 123, {foo:'bar'}, [1, 2, 3, 4], Object);
-</code></pre>
-
-<p>When you use the the logger it will include the line number as well as the logging level.</p>
-
-<h2>Setting the Logging Level</h2>
-
-<p>You can set the logging level fairly simply:</p>
-
-<pre><code>var logger = require('tracer').colorConsole({level:'warn'});
-</code></pre>
-
-<p>An even better way to do it is to use an app setting to set the logging level.  That way you can use azure portal to set the logging level without having to change any of the scripts.</p>
-
-<pre><code>var logger = require('tracer').colorConsole({level:process.env.LoggerLevel});
-</code></pre>
-
-<h2>Using Colour and Log Watcher</h2>
-
-<p>The web view of the logs isn&rsquo;t very useful for logging, instead I use a <a href="http://www.thejoyofcode.com/A_Mobile_Services_Log_Watcher_Day_6_.aspx">node.js script</a> from Josh Twist that polls the logs from the api. This allows you to see the errors as they happened and stops you from having to refresh a web page manually.</p>
-
-<p>As an additional bonus you can use colours when you are using the script. This makes it much easier to keep things organized.</p>
-
-<pre><code>var _ = require('lodash');
-var colors = require('colors');
-var logger = require('tracer').colorConsole({filters : {
-    log : colors.white,
-    trace : colors.grey,
-    debug : colors.magenta,
-    info : colors.green,
-    warn : colors.yellow,
-    error : [ colors.red, colors.bold ]
-},
-level:process.env.LoggerLevel //log,trace,debug,info,warn,error
-
-});
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Azure Dev Machine Auto Shutdown Part 2]]></title>
-    <link href="http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/"/>
-    <updated>2013-09-06T01:47:00+00:00</updated>
-    <id>http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2</id>
-    <content type="html"><![CDATA[<p>In <a href="http://Estyn.github.io/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Part 1</a> we looked at how to set-up a simple script to shut down an azure virtual machine after a period of inactivity.  The problem I had with the previous solution was determining the amount of inactivity time to set the script to run at.  I often found the machine was shutting down when I didn&rsquo;t want it to.  In this post we will add SMS notification when the machine is about to shut down and we will add an option for cancelling the shut down.
+<div class="entry-content"><p>In <a href="/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Part 1</a> we looked at how to set-up a simple script to shut down an azure virtual machine after a period of inactivity.  The problem I had with the previous solution was determining the amount of inactivity time to set the script to run at.  I often found the machine was shutting down when I didn&rsquo;t want it to.  In this post we will add SMS notification when the machine is about to shut down and we will add an option for cancelling the shut down.
  <!-- more --></p>
 
 <h2>Step 1: Get a <a href="https://www.twilio.com/user/account">Twillio</a> account if you don&rsquo;t already have one.</h2>
@@ -491,55 +499,120 @@ level:process.env.LoggerLevel //log,trace,debug,info,warn,error
 </span><span class='line'>    $msg = $twilio.SendSmsMessage("YOURTWILLIONUMBER", "YOURCELLPHONENUMBER", "VM about to shutdown")
 </span><span class='line'>Start-Countdown 900 -Scriptblock $sb -ProgressBar  -Clear</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Auto Shutdown For Windows Azure VM]]></title>
-    <link href="http://Estyn.github.io/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/"/>
-    <updated>2013-09-03T23:24:00+00:00</updated>
-    <id>http://Estyn.github.io/blog/2013/09/03/auto-shutdown-for-windows-azure-vm</id>
-    <content type="html"><![CDATA[<p>Thanks to the new MSDN credits that we get with our bizspack membership we have moved all of our development to Azure VMs.  Now that stopped (deallocated) VMs don&rsquo;t get charged we are able to have fairly large VMs for our dev machines as long as we remember to turn them off at night.  In order to make sure that we don&rsquo;t forget we put together a simple script that will shutdown the VM when called.</p>
 
-<h4>Update See <a href="http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/">Part 2</a> for adding SMS Notification and Cancellation</h4>
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
 
-<p> <!-- more --></p>
-
-<h3>Step 1: Install and Configure Windows Azure PowerShell</h3>
-
-<p>Follow the <a href="http://www.windowsazure.com/en-us/manage/install-and-configure-windows-powershell/">instructions</a> on Microsoft&rsquo;s site to configure Azure PowerShell</p>
-
-<h3>Step 2:  Create ShutDown.ps1</h3>
-
-<p>You only need a single line to shut down your azure VM</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Stop-AzureVM -Name "YourVMName" -ServiceName "YourServiceName" -Force</span></code></pre></td></tr></table></div></figure>
+      
 
 
-<p>Note: You have to use PowerShell to shutdown your VM if you don&rsquo;t want to continue paying for it when it is off.  When you shutdown from PowerShell or the portal your VM goes into a deallocated state.  If you shutdown the VM from the operating system or from the REST API then the VM turns off, but is not deallocated so you continue to be charged.</p>
-
-<p><img src="http://Estyn.github.io/images/2013-09-03-auto-shutdown-for-windows-azure-vm/Blog1.png"></p>
-
-<p>If you don&rsquo;t see Deallocated then you are still being charged for your VM.</p>
-
-<h3>Step 3: Setup the script to run automatically</h3>
-
-<p>The easiest way that I&rsquo;ve found to execute the script is to tie it in to the workstation lock event.</p>
-
-<ul>
-<li><p>In the screen saver settings set a timeout value and check &ldquo;On resume, display logon screen&rdquo;
-<img src="http://Estyn.github.io/images/2013-09-03-auto-shutdown-for-windows-azure-vm/Blog12.png"></p></li>
-<li><p>In the task scheduler create a new task named &ldquo;Shutdown&rdquo;</p></li>
-<li><p>Create a trigger that fires &ldquo;On workstation lock&rdquo; this will fire when the screen saver turns on.
-<img src="http://Estyn.github.io/images/2013-09-03-auto-shutdown-for-windows-azure-vm/Blog13.png"></p></li>
-<li><p>Create a &ldquo;Start a program&rdquo; actions that points to &ldquo;ShutDown.ps1&rdquo;
-<img src="http://Estyn.github.io/images/2013-09-03-auto-shutdown-for-windows-azure-vm/Blog14.png"></p></li>
-</ul>
 
 
-<p>Now when the VM&rsquo;s screen saver turns on it will lock the machine and execute the script which will shutdown the VM.</p>
-]]></content>
-  </entry>
+
+
+
+
   
-</feed>
+
+
+<time datetime="2013-09-06T01:47:00+00:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/azure/'>Azure</a>, <a class='category' href='/blog/categories/dev-vm/'>Dev VM</a>, <a class='category' href='/blog/categories/powershell/'>PowerShell</a>, <a class='category' href='/blog/categories/twillio/'>Twillio</a>, <a class='category' href='/blog/categories/vm/'>VM</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/" data-via="" data-counturl="http://Estyn.github.io/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/" title="Previous Post: Auto Shutdown For Windows Azure VM">&laquo; Auto Shutdown For Windows Azure VM</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/12/12/better-logging-in-azure-mobile-services/" title="Next Post: Better Logging in Azure Mobile Services">Better Logging in Azure Mobile Services &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/12/better-logging-in-azure-mobile-services/">Better Logging in Azure Mobile Services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/">Azure Dev Machine Auto Shutdown Part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Auto Shutdown for Windows Azure VM</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

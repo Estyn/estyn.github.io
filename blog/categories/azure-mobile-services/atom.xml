@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Azure Mobile Services | My Octopress Blog]]></title>
+  <link href="http://Estyn.github.io/blog/categories/azure-mobile-services/atom.xml" rel="self"/>
+  <link href="http://Estyn.github.io/"/>
+  <updated>2013-12-13T09:33:42+00:00</updated>
+  <id>http://Estyn.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Better Logging in Azure Mobile Services]]></title>
+    <link href="http://Estyn.github.io/blog/2013/12/12/better-logging-in-azure-mobile-services/"/>
+    <updated>2013-12-12T11:38:00+00:00</updated>
+    <id>http://Estyn.github.io/blog/2013/12/12/better-logging-in-azure-mobile-services</id>
+    <content type="html"><![CDATA[<p>Debugging in azure mobile services can be frustrating,  it only runs on Azure servers and you can&rsquo;t run any debugging tools on it.  Logging is pretty much the only way to debug your services. The default logging using console.log is fairly limited.  You can&rsquo;t turn it on or off easily or change the logging level. It also doesn&rsquo;t include the line number which can make it harder to debug a large service.
+ <!-- more --></p>
+
+<h2>Installing Tracer</h2>
+
+<p>Fortunately there are some excellent node modules for logging that work fairly well with Azure Mobile Services. I&rsquo;m using the excellent <a href="https://github.com/baryon/tracer">tracer</a> module.</p>
+
+<p>Installing the module is fairly straight forward, you will first need to <a href="http://www.windowsazure.com/en-us/develop/mobile/tutorials/store-scripts-in-source-control/">setup git access</a>. You then need to install the trace module.</p>
+
+<pre><code>npm install tracer
+</code></pre>
+
+<p>Once you have the the module installed you can use it in your scripts.</p>
+
+<pre><code>var logger = require('tracer').console();
+logger.log('hello');
+logger.trace('hello', 'world');
+logger.debug('hello %s',  'world', 123);
+logger.info('hello %s %d',  'world', 123, {foo:'bar'});
+logger.warn('hello %s %d %j', 'world', 123, {foo:'bar'});
+logger.error('hello %s %d %j', 'world', 123, {foo:'bar'}, [1, 2, 3, 4], Object);
+</code></pre>
+
+<p>When you use the the logger it will include the line number as well as the logging level.</p>
+
+<h2>Setting the Logging Level</h2>
+
+<p>You can set the logging level fairly simply:</p>
+
+<pre><code>var logger = require('tracer').colorConsole({level:'warn'});
+</code></pre>
+
+<p>An even better way to do it is to use an app setting to set the logging level.  That way you can use azure portal to set the logging level without having to change any of the scripts.</p>
+
+<pre><code>var logger = require('tracer').colorConsole({level:process.env.LoggerLevel});
+</code></pre>
+
+<h2>Using Colour and Log Watcher</h2>
+
+<p>The web view of the logs isn&rsquo;t very useful for logging, instead I use a <a href="http://www.thejoyofcode.com/A_Mobile_Services_Log_Watcher_Day_6_.aspx">node.js script</a> from Josh Twist that polls the logs from the api. This allows you to see the errors as they happened and stops you from having to refresh a web page manually.</p>
+
+<p>As an additional bonus you can use colours when you are using the script. This makes it much easier to keep things organized.</p>
+
+<pre><code>var _ = require('lodash');
+var colors = require('colors');
+var logger = require('tracer').colorConsole({filters : {
+    log : colors.white,
+    trace : colors.grey,
+    debug : colors.magenta,
+    info : colors.green,
+    warn : colors.yellow,
+    error : [ colors.red, colors.bold ]
+},
+level:process.env.LoggerLevel //log,trace,debug,info,warn,error
+
+});
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
