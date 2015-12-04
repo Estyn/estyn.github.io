@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Genymotion on Estyn&#39;s Blog</title>
+    <link>http://estynedwards.com/categories/genymotion/</link>
+    <description>Recent content in Genymotion on Estyn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Jan 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://estynedwards.com/categories/genymotion/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using Geny Motion for Xamarin Android Development in a VM</title>
+      <link>http://estynedwards.com/blog/2015/01/14/using-geny-motion-for-xamarin-android-development-in-a-vm/</link>
+      <pubDate>Wed, 15 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://estynedwards.com/blog/2015/01/14/using-geny-motion-for-xamarin-android-development-in-a-vm/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been doing a fair bit of android development using the Xamarin to allow me to code in c#.  I personally like to do all of my development in a virtual machine which allows me to have separate environments for different project.  This works well for most development, but for mobile development it posses some challenges when trying to run emulators.&lt;/p&gt;
+
+&lt;p&gt;I had been using VMWare to virtualize my development and a nexus 4 for testing.  I was also using the android emulators, but as most android developers know they run very slow.  I hear about &lt;a href=&#34;http://www.genymotion.com/&#34;&gt;Genymotion&lt;/a&gt; which is a super face android emulator.  It uses &lt;a href=&#34;http://www.virtualbox.org/&#34;&gt;VirtualBox&lt;/a&gt; to host the android vm, unfortunately VirtualBox &lt;a href=&#34;http://www.virtualbox.org/manual/ch10.html#hwvirt&#34;&gt;does not recomend&lt;/a&gt; running VirtualBox and VMWare at the same time.  Luckily moving the VMWare VM to VirtualBox is as simple as opening the VM with VirtualBox, no conversion needed.&lt;/p&gt;
+
+&lt;p&gt;Getting Genymotion working is fairly simple.  Follow the regular instructions to install Genymotion, once it installed we need to configure debugging on the development VM to point to the Genymotion VM.&lt;/p&gt;
+
+&lt;p&gt;First start you Genymotion machine, and open the Genymotion Configuration app to determine the IP address of the emulator.  In my case it was 192.168.56.101.&lt;/p&gt;
+
+&lt;p&gt;Now in the development machine you will need to run adb.exe (C:\Users\Administrator\AppData\Local\Android\android-sdk\platform-tools\adb.exe) from the command prompt.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; .\adb.exe connect 192.168.56.101
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see connected to 192.168.56.101 if everything worked correctly.  If you don&amp;rsquo;t see that you will need to check your networking setting on you VM and on Genymotion.  In my case I configured both as NAT.&lt;/p&gt;
+
+&lt;p&gt;If you have both machines configured as NAT and you want to be able to access a service hosted on your dev machine from either your host of the emulator you will need to configure your development VM network&amp;rsquo;s port forwarding.  Figure out your dev vm&amp;rsquo;s ip address (10.0.2.15 in my case) then create your port forwarding rule.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Name: MyRule&lt;/li&gt;
+&lt;li&gt;Protocol: TCP&lt;/li&gt;
+&lt;li&gt;HostIP: 127.0.0.1&lt;/li&gt;
+&lt;li&gt;Host Port: 88&lt;/li&gt;
+&lt;li&gt;Guest IP 10.0.2.15&lt;/li&gt;
+&lt;li&gt;Guest Port: 88&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now you should be setup for development in your VM with a nice fast emulater running on your host.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

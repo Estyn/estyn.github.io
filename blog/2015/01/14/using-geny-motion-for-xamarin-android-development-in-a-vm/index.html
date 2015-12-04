@@ -20,11 +20,11 @@
   
   <meta property="og:site_name" content="Estyn&#39;s Blog">
   <meta property="og:title" content="Estyn&#39;s Blog">
-  <meta property="og:url" content="http://estynedwards.com/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">
+  <meta property="og:url" content="http://estynedwards.com/blog/2015/01/14/using-geny-motion-for-xamarin-android-development-in-a-vm/">
   <meta property="og:description" content=""> 
   <meta property="og:type" content="article" />
   <meta property="og:article:author" content="" />
-  <meta property="og:article:published_time" content=" 2013-09-03T00:00:00Z " />  <meta name="generator" content="Hugo 0.14" />
+  <meta property="og:article:published_time" content=" 2014-01-15T00:00:00Z " />  <meta name="generator" content="Hugo 0.14" />
 
   
   <meta name="HandheldFriendly" content="True">
@@ -78,9 +78,9 @@
         <article class="post">
           <header>
 
-            <h1 class="title indent"> Auto Shutdown For Windows Azure VM</h1>
+            <h1 class="title indent"> Using Geny Motion for Xamarin Android Development in a VM</h1>
             <div class="meta clearfix">
-              <time class="pull-left" datetime="2014-01-15T07:33:19+00:00" pubdate="" data-updated="true"><i class="icon-calendar"></i> Tue Sep 3, 2013</time>
+              <time class="pull-left" datetime="2014-01-15T07:33:19+00:00" pubdate="" data-updated="true"><i class="icon-calendar"></i> Wed Jan 15, 2014</time>
 
               <div class="pull-left">
                 <i class="icon-tags"></i>
@@ -88,59 +88,44 @@
                    
                     <i class="fa fa-tag"></i>
                     
-                        <li><a href="/categories/Azure/">Azure</a></li>
+                        <li><a href="/categories/Xamarin/">Xamarin</a></li>
                     
-                        <li><a href="/categories/VM/">VM</a></li>
+                        <li><a href="/categories/Android/">Android</a></li>
                     
-                        <li><a href="/categories/PowerShell/">PowerShell</a></li>
+                        <li><a href="/categories/Genymotion/">Genymotion</a></li>
                     
                   
                 </ul>
               </div>
             </div>
           </header>
-          
+          <p>I&rsquo;ve been doing a fair bit of android development using the Xamarin to allow me to code in c#.  I personally like to do all of my development in a virtual machine which allows me to have separate environments for different project.  This works well for most development, but for mobile development it posses some challenges when trying to run emulators.</p>
 
-<p>Thanks to the new MSDN credits that we get with our bizspack membership we have moved all of our development to Azure VMs.  Now that stopped (deallocated) VMs don&rsquo;t get charged we are able to have fairly large VMs for our dev machines as long as we remember to turn them off at night.  In order to make sure that we don&rsquo;t forget we put together a simple script that will shutdown the VM when called.</p>
+<p>I had been using VMWare to virtualize my development and a nexus 4 for testing.  I was also using the android emulators, but as most android developers know they run very slow.  I hear about <a href="http://www.genymotion.com/">Genymotion</a> which is a super face android emulator.  It uses <a href="http://www.virtualbox.org/">VirtualBox</a> to host the android vm, unfortunately VirtualBox <a href="http://www.virtualbox.org/manual/ch10.html#hwvirt">does not recomend</a> running VirtualBox and VMWare at the same time.  Luckily moving the VMWare VM to VirtualBox is as simple as opening the VM with VirtualBox, no conversion needed.</p>
 
-<h3 id="update-see-part-2-blog-2013-09-06-azure-dev-machine-auto-shutdown-part-2-for-adding-sms-notification-and-cancellation:e2fbb72c5252ed814adc8984c782fa02">Update See <a href="/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/">Part 2</a> for adding SMS Notification and Cancellation</h3>
+<p>Getting Genymotion working is fairly simple.  Follow the regular instructions to install Genymotion, once it installed we need to configure debugging on the development VM to point to the Genymotion VM.</p>
 
-<h3 id="step-1-install-and-configure-windows-azure-powershell:e2fbb72c5252ed814adc8984c782fa02">Step 1: Install and Configure Windows Azure PowerShell</h3>
+<p>First start you Genymotion machine, and open the Genymotion Configuration app to determine the IP address of the emulator.  In my case it was 192.168.56.101.</p>
 
-<p>Follow the <a href="http://www.windowsazure.com/en-us/manage/install-and-configure-windows-powershell/">instructions</a> on Microsoft&rsquo;s site to configure Azure PowerShell</p>
+<p>Now in the development machine you will need to run adb.exe (C:\Users\Administrator\AppData\Local\Android\android-sdk\platform-tools\adb.exe) from the command prompt.</p>
 
-<h3 id="step-2-create-shutdown-ps1:e2fbb72c5252ed814adc8984c782fa02">Step 2:  Create ShutDown.ps1</h3>
+<pre><code> .\adb.exe connect 192.168.56.101
+</code></pre>
 
-<p>You only need a single line to shut down your azure VM</p>
+<p>You should see connected to 192.168.56.101 if everything worked correctly.  If you don&rsquo;t see that you will need to check your networking setting on you VM and on Genymotion.  In my case I configured both as NAT.</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Stop-AzureVM</span> <span style="color: #f8f8f2">-Name</span> <span style="color: #e6db74">&quot;YourVMName&quot;</span> <span style="color: #f8f8f2">-ServiceName</span> <span style="color: #e6db74">&quot;YourServiceName&quot;</span> <span style="color: #f8f8f2">-Force</span>
-</pre></div>
-</p>
-
-<p>Note: You have to use PowerShell to shutdown your VM if you don&rsquo;t want to continue paying for it when it is off.  When you shutdown from PowerShell or the portal your VM goes into a deallocated state.  If you shutdown the VM from the operating system or from the REST API then the VM turns off, but is not deallocated so you continue to be charged.</p>
-
-<p><img src="../Blog1.png" /></p>
-
-<p>If you don&rsquo;t see Deallocated then you are still being charged for your VM.</p>
-
-<h3 id="step-3-setup-the-script-to-run-automatically:e2fbb72c5252ed814adc8984c782fa02">Step 3: Setup the script to run automatically</h3>
-
-<p>The easiest way that I&rsquo;ve found to execute the script is to tie it in to the workstation lock event.</p>
+<p>If you have both machines configured as NAT and you want to be able to access a service hosted on your dev machine from either your host of the emulator you will need to configure your development VM network&rsquo;s port forwarding.  Figure out your dev vm&rsquo;s ip address (10.0.2.15 in my case) then create your port forwarding rule.</p>
 
 <ul>
-<li><p>In the screen saver settings set a timeout value and check &ldquo;On resume, display logon screen&rdquo;
-<img src="../Blog12.png " /></p></li>
-
-<li><p>In the task scheduler create a new task named &ldquo;Shutdown&rdquo;</p></li>
-
-<li><p>Create a trigger that fires &ldquo;On workstation lock&rdquo; this will fire when the screen saver turns on.
-<img src="../Blog13.png " /></p></li>
-
-<li><p>Create a &ldquo;Start a program&rdquo; actions that points to &ldquo;ShutDown.ps1&rdquo;
-<img src="../Blog14.png " /></p></li>
+<li>Name: MyRule</li>
+<li>Protocol: TCP</li>
+<li>HostIP: 127.0.0.1</li>
+<li>Host Port: 88</li>
+<li>Guest IP 10.0.2.15</li>
+<li>Guest Port: 88</li>
 </ul>
 
-<p>Now when the VM&rsquo;s screen saver turns on it will lock the machine and execute the script which will shutdown the VM.</p>
+<p>Now you should be setup for development in your VM with a nice fast emulater running on your host.</p>
 
         </article>
       </div>
