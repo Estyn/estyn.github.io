@@ -11,10 +11,10 @@
     
     <item>
       <title>Using Geny Motion for Xamarin Android Development in a VM</title>
-      <link>http://estynedwards.com/blog/2015/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/</link>
+      <link>http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/</link>
       <pubDate>Wed, 15 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://estynedwards.com/blog/2015/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/</guid>
+      <guid>http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been doing a fair bit of android development using the Xamarin to allow me to code in c#.  I personally like to do all of my development in a virtual machine which allows me to have separate environments for different project.  This works well for most development, but for mobile development it posses some challenges when trying to run emulators.&lt;/p&gt;
 
 &lt;p&gt;I had been using VMWare to virtualize my development and a nexus 4 for testing.  I was also using the android emulators, but as most android developers know they run very slow.  I hear about &lt;a href=&#34;http://www.genymotion.com/&#34;&gt;Genymotion&lt;/a&gt; which is a super face android emulator.  It uses &lt;a href=&#34;http://www.virtualbox.org/&#34;&gt;VirtualBox&lt;/a&gt; to host the android vm, unfortunately VirtualBox &lt;a href=&#34;http://www.virtualbox.org/manual/ch10.html#hwvirt&#34;&gt;does not recomend&lt;/a&gt; running VirtualBox and VMWare at the same time.  Luckily moving the VMWare VM to VirtualBox is as simple as opening the VM with VirtualBox, no conversion needed.&lt;/p&gt;
