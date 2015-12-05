@@ -222,7 +222,8 @@ An even better way to do it is to use an app setting to set the logging level.  
     (function() {
     
     
-   
+   if (window.location.hostname == "localhost")
+        return;
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     var disqus_shortname = 'estyn';
