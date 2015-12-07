@@ -32,6 +32,7 @@
 
   <link href="/favicon.ico" rel="icon">
   <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/codehilite.css"  rel="stylesheet" type="text/css">
   <script src="/js/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
@@ -116,17 +117,17 @@ estynedwards
 <p>Fortunately there are some excellent node modules for logging that work fairly well with Azure Mobile Services. I&rsquo;m using the excellent <a href="https://github.com/baryon/tracer">tracer</a> module.</p>
 
 <p>Installing the module is fairly straight forward, you will first need to <a href="http://www.windowsazure.com/en-us/develop/mobile/tutorials/store-scripts-in-source-control/">setup git access</a>. You then need to install the trace module.
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #a6e22e">npm</span> <span style="color: #a6e22e">install</span> <span style="color: #a6e22e">tracer</span>
+<div class="highlight"><pre>    <span class="nx">npm</span> <span class="nx">install</span> <span class="nx">tracer</span>
 </pre></div>
 
 Once you have the the module installed you can use it in your scripts.
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">logger</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;tracer&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">console</span><span style="color: #f8f8f2">();</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello&#39;</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">trace</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;world&#39;</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">debug</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello %s&#39;</span><span style="color: #f8f8f2">,</span>  <span style="color: #e6db74">&#39;world&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">123</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">info</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello %s %d&#39;</span><span style="color: #f8f8f2">,</span>  <span style="color: #e6db74">&#39;world&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">123</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">foo</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;bar&#39;</span><span style="color: #f8f8f2">});</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">warn</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello %s %d %j&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;world&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">123</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">foo</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;bar&#39;</span><span style="color: #f8f8f2">});</span>
-    <span style="color: #a6e22e">logger</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">error</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;hello %s %d %j&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;world&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">123</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">foo</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;bar&#39;</span><span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">Object);</span>
+<div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tracer&#39;</span><span class="p">).</span><span class="nx">console</span><span class="p">();</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">trace</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">);</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s1">&#39;hello %s&#39;</span><span class="p">,</span>  <span class="s1">&#39;world&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">);</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;hello %s %d&#39;</span><span class="p">,</span>  <span class="s1">&#39;world&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">{</span><span class="nx">foo</span><span class="o">:</span><span class="s1">&#39;bar&#39;</span><span class="p">});</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;hello %s %d %j&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">{</span><span class="nx">foo</span><span class="o">:</span><span class="s1">&#39;bar&#39;</span><span class="p">});</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;hello %s %d %j&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">{</span><span class="nx">foo</span><span class="o">:</span><span class="s1">&#39;bar&#39;</span><span class="p">},</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="nb">Object</span><span class="p">);</span>
 </pre></div>
 
 When you use the the logger it will include the line number as well as the logging level.</p>
@@ -134,11 +135,11 @@ When you use the the logger it will include the line number as well as the loggi
 <h2 id="setting-the-logging-level:2f39450fed439462d39e03c2283dd003">Setting the Logging Level</h2>
 
 <p>You can set the logging level fairly simply:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">logger</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;tracer&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">colorConsole</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">level</span><span style="color: #f92672">:</span><span style="color: #e6db74">&#39;warn&#39;</span><span style="color: #f8f8f2">});</span>
+<div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tracer&#39;</span><span class="p">).</span><span class="nx">colorConsole</span><span class="p">({</span><span class="nx">level</span><span class="o">:</span><span class="s1">&#39;warn&#39;</span><span class="p">});</span>
 </pre></div>
 
 An even better way to do it is to use an app setting to set the logging level.  That way you can use azure portal to set the logging level without having to change any of the scripts.
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">logger</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;tracer&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">colorConsole</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">level</span><span style="color: #f92672">:</span><span style="color: #a6e22e">process</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">env</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">LoggerLevel</span><span style="color: #f8f8f2">});</span>
+<div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tracer&#39;</span><span class="p">).</span><span class="nx">colorConsole</span><span class="p">({</span><span class="nx">level</span><span class="o">:</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">LoggerLevel</span><span class="p">});</span>
 </pre></div>
 </p>
 
@@ -147,19 +148,19 @@ An even better way to do it is to use an app setting to set the logging level.  
 <p>The web view of the logs isn&rsquo;t very useful for logging, instead I use a <a href="http://www.thejoyofcode.com/A_Mobile_Services_Log_Watcher_Day_6_.aspx">node.js script</a> from Josh Twist that polls the logs from the api. This allows you to see the errors as they happened and stops you from having to refresh a web page manually.</p>
 
 <p>As an additional bonus you can use colours when you are using the script. This makes it much easier to keep things organized.
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">_</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;lodash&#39;</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">colors</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;colors&#39;</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">logger</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">require</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;tracer&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">colorConsole</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">filters</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span>
-	    <span style="color: #a6e22e">log</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">white</span><span style="color: #f8f8f2">,</span>
-	    <span style="color: #a6e22e">trace</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">grey</span><span style="color: #f8f8f2">,</span>
-	    <span style="color: #a6e22e">debug</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">magenta</span><span style="color: #f8f8f2">,</span>
-	    <span style="color: #a6e22e">info</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">green</span><span style="color: #f8f8f2">,</span>
-	    <span style="color: #a6e22e">warn</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">yellow</span><span style="color: #f8f8f2">,</span>
-	    <span style="color: #a6e22e">error</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">red</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">colors</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">bold</span> <span style="color: #f8f8f2">]</span>
-    <span style="color: #f8f8f2">},</span>
-    <span style="color: #a6e22e">level</span><span style="color: #f92672">:</span><span style="color: #a6e22e">process</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">env</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">LoggerLevel</span> <span style="color: #75715e">//log,trace,debug,info,warn,error</span>
+<div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">colors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;colors&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tracer&#39;</span><span class="p">).</span><span class="nx">colorConsole</span><span class="p">({</span><span class="nx">filters</span> <span class="o">:</span> <span class="p">{</span>
+	    <span class="nx">log</span> <span class="o">:</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span>
+	    <span class="nx">trace</span> <span class="o">:</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span>
+	    <span class="nx">debug</span> <span class="o">:</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">magenta</span><span class="p">,</span>
+	    <span class="nx">info</span> <span class="o">:</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">green</span><span class="p">,</span>
+	    <span class="nx">warn</span> <span class="o">:</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">yellow</span><span class="p">,</span>
+	    <span class="nx">error</span> <span class="o">:</span> <span class="p">[</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">red</span><span class="p">,</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">bold</span> <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">level</span><span class="o">:</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">LoggerLevel</span> <span class="c1">//log,trace,debug,info,warn,error</span>
     
-    <span style="color: #f8f8f2">});</span>
+    <span class="p">});</span>
 </pre></div>
 </p>
 
@@ -182,6 +183,11 @@ An even better way to do it is to use an app setting to set the logging level.  
   <ul class="divided">
     
 	 <li class="post">
+        <a href="http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/">Using a JQuery Plugin in Angular 2</a>
+		
+      </li>
+	
+	 <li class="post">
         <a href="http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/">Using Geny Motion for Xamarin Android Development in a VM</a>
 		
       </li>
@@ -198,11 +204,6 @@ An even better way to do it is to use an app setting to set the logging level.  
 	
 	 <li class="post">
         <a href="http://estynedwards.com/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Auto Shutdown For Windows Azure VM</a>
-		
-      </li>
-	
-	 <li class="post">
-        <a href="http://estynedwards.com/"></a>
 		
       </li>
 	

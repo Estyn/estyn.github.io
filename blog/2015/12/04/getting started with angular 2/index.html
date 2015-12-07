@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+
+
+<html class="no-js" lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="author" content="">
+  <meta name="keywords" content="awesome, definitely"> 
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:title" content="">
+  <meta property="og:url" content="">
+  <meta property="og:description" content=""> 
+  <meta property="og:type" content="website" />  
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="canonical" href="" />
+
+  <link href="/favicon.ico" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/codehilite.css"  rel="stylesheet" type="text/css">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))
+  </script>
+  
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+</head>
+<body>
+
+  <header>
+    <div class="grid-wrapper">
+  <div class="grid">
+
+    <div class="grid__item two-fifths lap-four-sixths palm-one-whole">
+      <a href="http://estynedwards.com/" class="site-title">Estyn&#39;s Blog</a>
+    </div>
+
+    <div class="grid__item three-fifths lap-two-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+<ul class="menu pull-right">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/">Blog</a></li>
+</ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  </header>
+
+
+
+  <div class="grid-wrapper">
+    <div class="grid grid-center">
+
+      <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+
+        <article class="post">
+          <header>
+
+            <h1 class="title indent"> Using a JQuery Plugin in Angular 2</h1>
+            <div class="meta clearfix">
+              <time class="pull-left" datetime="2014-01-15T07:33:19+00:00" pubdate="" data-updated="true"><i class="icon-calendar"></i> Fri Dec 4, 2015</time>
+
+              <div class="pull-left">
+                <i class="icon-tags"></i>
+                <ul class="tags unstyled">
+                  
+                  <i class="fa fa-tag"></i> 
+                  <li><a href="/categories/Angluar%202/">Angluar 2</a></li>
+                   
+                </ul>
+              </div>
+            </div>
+          </header>
+          
+  
+asds
+
+Estyn Edwards
+
+estyn
+
+estyn
+
+estynedwards
+
+          
+          <p>I have been working on a small content editing tool for an internal project and decided to try using angular 2.  For this project I want to use the TinyMCE.js.  In anglar 1.x I would wrap it in a directive and work with it that way.</p>
+
+<aside class="notice">
+This code was testing with alpha 48
+</aside>
+
+<p>In angular 2.0 there are no directives, instead we use a component which ends up being much simpler than a directive.  The full code is below folled by a brief explaination.</p>
+
+<p><div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">ElementRef</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">Output</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">,</span><span class="nx">OnChanges</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;angular2/angular2&#39;</span><span class="p">;</span>
+<span class="kr">declare</span> <span class="kd">var</span> <span class="nx">tinymce</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;tiny-editor&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="err">@</span><span class="nx">View</span><span class="p">({</span>
+	<span class="nx">template</span><span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">textarea</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;tinyMCE&quot;</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;height:300px&quot;</span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;`</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">TinyEditor</span> <span class="kr">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+    <span class="err">@</span><span class="nx">Input</span><span class="p">()</span> <span class="nx">value</span>: <span class="kt">any</span><span class="p">;</span>
+    <span class="err">@</span><span class="nx">Output</span><span class="p">()</span> <span class="nx">valueChange</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">();</span>
+
+    <span class="nx">elementRef</span>: <span class="kt">ElementRef</span><span class="p">;</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">elementRef</span>: <span class="kt">ElementRef</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">elementRef</span> <span class="o">=</span> <span class="nx">elementRef</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">onInit() {</span>
+        <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="nx">tinymce</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
+		<span class="p">{</span>
+		  <span class="nx">selector</span><span class="o">:</span> <span class="s2">&quot;.tinyMCE&quot;</span><span class="p">,</span>
+		  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span>
+		  <span class="nx">menubar</span>: <span class="kt">false</span><span class="p">,</span>
+		  <span class="nx">toolbar1</span><span class="o">:</span> <span class="s2">&quot;bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect   bullist numlist outdent indent blockquote undo redo removeformat subscript superscript | code&quot;</span><span class="p">,</span>
+		  <span class="nx">setup</span><span class="o">:</span> <span class="p">(</span><span class="nx">editor</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		  <span class="nx">editor</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">l</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		      <span class="nx">that</span><span class="p">.</span><span class="nx">valueChange</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">editor</span><span class="p">.</span><span class="nx">getContent</span><span class="p">());</span>
+		  <span class="p">});</span>
+		<span class="p">}</span>
+	   <span class="p">});</span>
+	<span class="p">}</span>
+    <span class="nx">onChanges</span><span class="p">(</span><span class="nx">changes</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">tinymce</span><span class="p">.</span><span class="nx">activeEditor</span><span class="p">)</span>
+            <span class="nx">tinymce</span><span class="p">.</span><span class="nx">activeEditor</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+With the tinyMCE component we want to have two way binding for the text in the editor.  In order to do this we need to use Input (with OnChanges) and Output (with EventEmmiter).</p>
+
+<p>Usage:
+<div class="highlight"><pre><span class="nt">&lt;tiny-editor</span> <span class="err">[</span><span class="na">value</span><span class="err">]=&quot;</span><span class="na">model</span><span class="err">.</span><span class="na">data</span><span class="err">&quot;</span> <span class="err">(</span><span class="na">value-change</span><span class="err">)=&quot;</span><span class="na">model</span><span class="err">.</span><span class="na">data=</span><span class="s">$event&quot;</span><span class="nt">&gt;&lt;/tiny-editor&gt;</span>
+</pre></div>
+
+In order to make sure that the editor updates when the text changes we implement the onChanges event which will fire everytime any of the inputs changes.  In this case we only have one input so we can update the editor everytime there is a change.</p>
+
+<p>Updating the model when there is a change in the editor is a little bit more complicated, in order to do this we use an event emmitter. We setup tinyMCE&rsquo;s change event to call &lsquo;next&rsquo; on our event emitter to allow us bind the new data back to the model.</p>
+
+        </article>
+      </div>
+      <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+        <section class="social aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">
+    Follow me!
+  </h1>
+  <ul class="unstyled">
+  
+    <li><a class="twitter" href="//twitter.com/estynedwards"><i class="icon-twitter"></i> Twitter</a></li>
+    <li><a class="github" href="//github.com/estyn"><i class="icon-github"></i> Github</a></li>
+    
+  </ul>
+</section>
+<section id="recent-posts" class="aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">Recent Posts</h1>
+  <ul class="divided">
+    
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/">Using a JQuery Plugin in Angular 2</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/">Using Geny Motion for Xamarin Android Development in a VM</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2013/12/12/better-logging-in-azure-mobile-services/">Better Logging in Azure Mobile Services</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/">Azure Dev Machine Auto Shutdown Part 2</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Auto Shutdown For Windows Azure VM</a>
+		
+      </li>
+	
+  
+    
+  </ul>
+</section>
+      </aside>
+
+    </div>
+  </div>
+  <h1 class="indent title">Comments</h1>
+<section id="comments">
+  <div id="disqus_thread" class="post-comments"></div>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    (function() {
+    
+    
+   if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'estyn';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+  <footer>
+    <footer>
+	<div class="grid-wrapper">
+		<div class="grid">
+			<div class="grid__item">
+				<p class="copyright">
+					All content by Estyn Edwards and licenced under <a href="//creativecommons.org/licenses/by-nc-sa/3.0/ie/">Creative Commons</a>.
+					<br> Code under <a href="https://opensource.org/licenses/MIT">MIT Licence</a>.
+				</p>
+			</div>
+		</div>
+	</div>
+
+</footer>
+  </footer>
+
+  
+
+</body>
+
+</html>

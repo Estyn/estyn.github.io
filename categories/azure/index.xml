@@ -24,17 +24,17 @@
 &lt;p&gt;Fortunately there are some excellent node modules for logging that work fairly well with Azure Mobile Services. I&amp;rsquo;m using the excellent &lt;a href=&#34;https://github.com/baryon/tracer&#34;&gt;tracer&lt;/a&gt; module.&lt;/p&gt;
 
 &lt;p&gt;Installing the module is fairly straight forward, you will first need to &lt;a href=&#34;http://www.windowsazure.com/en-us/develop/mobile/tutorials/store-scripts-in-source-control/&#34;&gt;setup git access&lt;/a&gt;. You then need to install the trace module.
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #a6e22e&#34;&gt;npm&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;install&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;tracer&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &lt;span class=&#34;nx&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tracer&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 Once you have the the module installed you can use it in your scripts.
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;console&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;trace&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;debug&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello %s&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;info&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello %s %d&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;foo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;warn&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello %s %d %j&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;foo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello %s %d %j&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;foo&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Object);&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;trace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;debug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello %s&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;s1&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello %s %d&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;s1&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;warn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello %s %d %j&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello %s %d %j&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 When you use the the logger it will include the line number as well as the logging level.&lt;/p&gt;
@@ -42,11 +42,11 @@ When you use the the logger it will include the line number as well as the loggi
 &lt;h2 id=&#34;setting-the-logging-level:2f39450fed439462d39e03c2283dd003&#34;&gt;Setting the Logging Level&lt;/h2&gt;
 
 &lt;p&gt;You can set the logging level fairly simply:
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;colorConsole&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;level&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;warn&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;colorConsole&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;level&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;warn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 An even better way to do it is to use an app setting to set the logging level.  That way you can use azure portal to set the logging level without having to change any of the scripts.
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;colorConsole&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;level&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;process&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;LoggerLevel&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;colorConsole&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;level&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LoggerLevel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
@@ -55,19 +55,19 @@ An even better way to do it is to use an app setting to set the logging level.  
 &lt;p&gt;The web view of the logs isn&amp;rsquo;t very useful for logging, instead I use a &lt;a href=&#34;http://www.thejoyofcode.com/A_Mobile_Services_Log_Watcher_Day_6_.aspx&#34;&gt;node.js script&lt;/a&gt; from Josh Twist that polls the logs from the api. This allows you to see the errors as they happened and stops you from having to refresh a web page manually.&lt;/p&gt;
 
 &lt;p&gt;As an additional bonus you can use colours when you are using the script. This makes it much easier to keep things organized.
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;colors&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;logger&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;colorConsole&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;filters&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;log&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;white&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;trace&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;grey&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;debug&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;magenta&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;info&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;green&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;warn&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;yellow&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-	    &lt;span style=&#34;color: #a6e22e&#34;&gt;error&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;red&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;colors&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;bold&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;level&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;process&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;LoggerLevel&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//log,trace,debug,info,warn,error&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;colors&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tracer&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;colorConsole&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;filters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;white&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;trace&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;grey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;debug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;magenta&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;info&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;green&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;warn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;yellow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	    &lt;span class=&#34;nx&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;red&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;bold&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;level&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LoggerLevel&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//log,trace,debug,info,warn,error&lt;/span&gt;
     
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 </description>
@@ -91,10 +91,10 @@ An even better way to do it is to use an app setting to set the logging level.  
 &lt;h2 id=&#34;step-2-get-the-twillio-and-restsharp-dll:0716029e4afe5b7c2e2968be46ffbacd&#34;&gt;Step 2: Get the Twillio and RestSharp dll&lt;/h2&gt;
 
 &lt;p&gt;In order to use Twillio from powershell we will need to have a copy of  Twillio.API.dll which has a dependency on  RestSharp.dll so we will need that as well.  I&amp;rsquo;ve found NuGet to be the easiest way to get both.
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Install-Package&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Twilio&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;n&#34;&gt;Install-Package&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Twilio&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Install-Package&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;RestSharp`&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;n&#34;&gt;Install-Package&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RestSharp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;`&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
@@ -102,10 +102,10 @@ An even better way to do it is to use an app setting to set the logging level.  
 
 &lt;h2 id=&#34;step-3-modify-the-script-to-send-an-sms-prior-to-shutting-down:0716029e4afe5b7c2e2968be46ffbacd&#34;&gt;Step 3: Modify the script to send an SMS prior to shutting down&lt;/h2&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Add-Type&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-path&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;c:\Twilio.Api.dll&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;Add-Type&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-path&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;c:\RestSharp.dll&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$twilio&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;new-object&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Twilio.TwilioRestClient(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURACCOUNTSID&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURAUTHTOKEN&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$msg&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$twilio.SendSmsMessage(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURTWILLIONUMBER&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURCELLPHONENUMBER&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;VM about to shutdown&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;Add-Type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;c:\Twilio.Api.dll&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;Add-Type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;c:\RestSharp.dll&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$twilio&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;new-object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Twilio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TwilioRestClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURACCOUNTSID&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURAUTHTOKEN&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$msg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$twilio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SendSmsMessage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURTWILLIONUMBER&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURCELLPHONENUMBER&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;VM about to shutdown&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
@@ -115,189 +115,189 @@ An even better way to do it is to use an app setting to set the logging level.  
 
 &lt;p&gt;I&amp;rsquo;m using a nice script by &lt;a href=&#34;http://jdhitsolutions.com/blog/2012/04/friday-fun-powershell-countdown/&#34;&gt;Jeffery Hicks&lt;/a&gt; that displays a nice countdown message on the screen before executing the shut down.  You can read his blog post to see how the script works.  The complete script is listed below, it sends an SMS then waits 15 minutes before executing the shut down command. The countdown can be interrupted with the esc key to prevent the shut down.&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; -----------------------------------------------------------------------------&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Script: Countdown2.ps1&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Version: 0.9&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Author: Jeffery Hicks&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;    http://jdhitsolutions.com/blog&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;    http://twitter.com/JeffHicks&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;    http://www.ScriptingGeek.com&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Date: 4/27/2012&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Keywords:&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; Comments:&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; This is a variation on the Start-Countdown script from Josh Atwell&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep)&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cm&#34;&gt;&amp;lt;#&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; -----------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Script: Countdown2.ps1&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Version: 0.9&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Author: Jeffery Hicks&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;    http://jdhitsolutions.com/blog&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;    http://twitter.com/JeffHicks&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;    http://www.ScriptingGeek.com&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Date: 4/27/2012&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Keywords:&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; Comments:&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; This is a variation on the Start-Countdown script from Josh Atwell&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep)&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt; &amp;quot;Those who forget to script are doomed to repeat their work.&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; &amp;quot;Those who forget to script are doomed to repeat their work.&amp;quot;&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;  ****************************************************************&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;  * DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED *&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;  * THOROUGHLY IN A LAB ENVIRONMENT. USE AT YOUR OWN RISK.  IF   *&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;  * YOU DO NOT UNDERSTAND WHAT THIS SCRIPT DOES OR HOW IT WORKS, *&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;  * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;  ****************************************************************&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; -----------------------------------------------------------------------------&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt; #&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  ****************************************************************&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  * DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED *&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  * THOROUGHLY IN A LAB ENVIRONMENT. USE AT YOUR OWN RISK.  IF   *&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  * YOU DO NOT UNDERSTAND WHAT THIS SCRIPT DOES OR HOW IT WORKS, *&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;  ****************************************************************&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; -----------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt; #&amp;gt;&lt;/span&gt;
  
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;Import-Module&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;Function&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Start-Countdown&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Synopsis&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 Initiates a countdown before running a command&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;    &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Description&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;  &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     This is a variation on the Start-Countdown script from Josh Atwell&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     It can be used instead of Start-Sleep and provides a visual countdown &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     progress during &amp;quot;sleep&amp;quot; times. At the end of the countdown, your &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     command will execute. Press the ESC key any time during the countdown&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     to abort. &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     USING START-COUNTDOWN IN THE POWERSHELL ISE&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     Results will vary slightly in the PowerShell ISE. If you use this in&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     the ISE, it is recommended to use -Clear. You also cannot use the ESC&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     key to abort the script if using the console. You&amp;#39;ll need to press&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     Ctrl+C. If using the progress bar, there is a Stop button in the ISE.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     If you abort in the ISE, you won&amp;#39;t get the warning message.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Parameter&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt; Seconds&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     The number of seconds to countdown. The default is 10.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Parameter&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt; Scriptblock&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     A PowerShell scriptblock to execute at the end of the countdown.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Parameter&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt; ProgressBar&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     Use a progress bar instead of the console.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Parameter&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt; Clear&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     Clear the screen. Other wise, the countdown will use the current location.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Parameter&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt; Message&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     The message to be displayed at the end of the countdown before any&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     scriptblock is executed.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     	 &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Example&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 PS C:\&amp;gt; Start-Countdown -Seconds 10 -clear&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 This method will clear the screen and display descending seconds&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Example&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 PS C:\&amp;gt; Start-Countdown -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 	 &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Link&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	 http://jdhitsolutions.com/blog&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;.Link&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;     Write-Progress&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;	&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&amp;gt;&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;Param&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Parameter&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Position&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;=0,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;HelpMessage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Enter seconds to countdown from&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)]&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;[Int]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Seconds&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;10,&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Parameter&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Position&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;=1,&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Mandatory&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;=$False,&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;HelpMessage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Enter a scriptblock to execute at the end of the countdown&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)]&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;[scriptblock]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Scriptblock,&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;[Switch]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$ProgressBar,&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;[Switch]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Clear,&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;[String]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Message&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Sutting down VM&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;Import-Module&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;Function&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Start-Countdown&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;&amp;lt;#&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Synopsis&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 Initiates a countdown before running a command&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;    &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Description&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;  &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     This is a variation on the Start-Countdown script from Josh Atwell&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     It can be used instead of Start-Sleep and provides a visual countdown &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     progress during &amp;quot;sleep&amp;quot; times. At the end of the countdown, your &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     command will execute. Press the ESC key any time during the countdown&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     to abort. &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     USING START-COUNTDOWN IN THE POWERSHELL ISE&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     Results will vary slightly in the PowerShell ISE. If you use this in&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     the ISE, it is recommended to use -Clear. You also cannot use the ESC&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     key to abort the script if using the console. You&amp;#39;ll need to press&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     Ctrl+C. If using the progress bar, there is a Stop button in the ISE.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     If you abort in the ISE, you won&amp;#39;t get the warning message.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Parameter&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; Seconds&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     The number of seconds to countdown. The default is 10.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Parameter&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; Scriptblock&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     A PowerShell scriptblock to execute at the end of the countdown.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Parameter&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; ProgressBar&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     Use a progress bar instead of the console.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Parameter&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; Clear&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     Clear the screen. Other wise, the countdown will use the current location.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Parameter&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; Message&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     The message to be displayed at the end of the countdown before any&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     scriptblock is executed.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     	 &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Example&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 PS C:\&amp;gt; Start-Countdown -Seconds 10 -clear&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 This method will clear the screen and display descending seconds&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Example&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 PS C:\&amp;gt; Start-Countdown -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 	 &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Link&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	 http://jdhitsolutions.com/blog&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;.Link&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;     Write-Progress&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;	&lt;/span&gt;
+&lt;span class=&#34;cm&#34;&gt;#&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;Param&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Parameter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Position&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;HelpMessage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Enter seconds to countdown from&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;span class=&#34;no&#34;&gt;[Int]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Parameter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Position&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Mandatory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;HelpMessage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Enter a scriptblock to execute at the end of the countdown&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;span class=&#34;no&#34;&gt;[scriptblock]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Scriptblock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;no&#34;&gt;[Switch]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$ProgressBar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;no&#34;&gt;[Switch]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;no&#34;&gt;[String]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Message&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Sutting down VM&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;#save beginning value for total seconds&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$TotalSeconds=$Seconds&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;#save beginning value for total seconds&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$TotalSeconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;#get current cursor position&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;New-Object&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;System.Management.Automation.Host.Coordinates&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate.X=$host.ui.rawui.CursorPosition.X&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate.Y=$host.ui.rawui.CursorPosition.Y&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;#get current cursor position&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;New-Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Management&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Automation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Coordinates&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CursorPosition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CursorPosition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Y&lt;/span&gt;
 
-&lt;span style=&#34;color: #66d9ef&#34;&gt;If&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($clear)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;Clear-Host&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;#find the middle of the current window&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate.X=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;[int]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($host.ui.rawui.WindowSize.Width/2)&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate.Y=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;[int]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($host.ui.rawui.WindowSize.Height/2)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;If&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;Clear-Host&lt;/span&gt;
+    &lt;span class=&#34;c&#34;&gt;#find the middle of the current window&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WindowSize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Width&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WindowSize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Height&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;#define the Escape key&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$ESCKey&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;27&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;#define the Escape key&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$ESCKey&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;27&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;#define a variable indicating if the user aborted the countdown&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Abort=$False&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;#define a variable indicating if the user aborted the countdown&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$Abort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$False&lt;/span&gt;
 
-&lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($seconds&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-ge&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;1)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$seconds&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-ge&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($host.ui.RawUi.KeyAvailable)&lt;/span&gt;
-    		&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    		&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$host.ui.RawUI.ReadKey(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;NoEcho,IncludeKeyUp,IncludeKeyDown&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RawUi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyAvailable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    		&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    		&lt;span class=&#34;nv&#34;&gt;$key&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RawUI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReadKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;NoEcho,IncludeKeyUp,IncludeKeyDown&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 
-    		&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($key.VirtualKeyCode&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-eq&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$ESCkey)&lt;/span&gt;
-    			&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-                &lt;span style=&#34;color: #75715e&#34;&gt;#ESC was pressed so quit the countdown and set abort flag to True&lt;/span&gt;
-    			&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Seconds&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;0&lt;/span&gt;
-                &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Abort=$True&lt;/span&gt; 
-    			&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-    		&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VirtualKeyCode&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$ESCkey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    			&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;c&#34;&gt;#ESC was pressed so quit the countdown and set abort flag to True&lt;/span&gt;
+    			&lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;
+                &lt;span class=&#34;nv&#34;&gt;$Abort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$True&lt;/span&gt; 
+    			&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;If&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($ProgressBar){&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#calculate percent time remaining, but in reverse so the progress bar&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#moves from left to right&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$percent=100&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($seconds/$TotalSeconds)*100&lt;/span&gt;
-    	&lt;span style=&#34;color: #f8f8f2&#34;&gt;Write-Progress&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Activity&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Countdown&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-SecondsRemaining&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Seconds&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Status&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Shutting doown in (esc to cancel)&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-PercentComplete&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$percent&lt;/span&gt;
-    	&lt;span style=&#34;color: #f8f8f2&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Seconds&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;Else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($Clear)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-          &lt;span style=&#34;color: #f8f8f2&#34;&gt;Clear-Host&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; 
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$host.ui.rawui.CursorPosition=$Coordinate&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#write the seconds with padded trailing spaces to overwrite any extra digits such&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#as moving from 10 to 9&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$pad=($TotalSeconds&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-as&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;[string]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).Length&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($seconds&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-le&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;10)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$color=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Red&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$color=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Green&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ESC to cancel: &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$((&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;[string]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$Seconds).Padright($pad))&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-foregroundcolor&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$color&lt;/span&gt;
-    	&lt;span style=&#34;color: #f8f8f2&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Seconds&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;#decrement $Seconds&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Seconds--&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;#while&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;If&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$ProgressBar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#calculate percent time remaining, but in reverse so the progress bar&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#moves from left to right&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;$percent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$seconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$TotalSeconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;100&lt;/span&gt;
+    	&lt;span class=&#34;nb&#34;&gt;Write-Progress&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Activity&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Countdown&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-SecondsRemaining&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Status&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Shutting doown in (esc to cancel)&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-PercentComplete&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$percent&lt;/span&gt;
+    	&lt;span class=&#34;nb&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Seconds&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;Else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;nb&#34;&gt;Clear-Host&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; 
+        &lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CursorPosition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#write the seconds with padded trailing spaces to overwrite any extra digits such&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#as moving from 10 to 9&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;$pad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$TotalSeconds&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-as&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;[string]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Length&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$seconds&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-le&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nv&#34;&gt;$color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Red&amp;quot;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nv&#34;&gt;$color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Green&amp;quot;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;nb&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;ESC to cancel: &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;$((&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[string]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Padright&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-foregroundcolor&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$color&lt;/span&gt;
+    	&lt;span class=&#34;nb&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Seconds&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;c&#34;&gt;#decrement $Seconds&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$Seconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;--&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;#while&lt;/span&gt;
 
-&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($Progress)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#set progress to complete&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Write-Progress&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Completed&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Progress&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#set progress to complete&lt;/span&gt;
+        &lt;span class=&#34;nb&#34;&gt;Write-Progress&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Completed&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-Not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Abort)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-Not&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$Abort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
     
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($clear)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;#if $Clear was used, center the message in the console&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Coordinate.X=$Coordinate.X&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;[int]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($message.Length)/2)&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;#if $Clear was used, center the message in the console&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$host.ui.rawui.CursorPosition=$Coordinate&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CursorPosition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$Coordinate&lt;/span&gt;
     
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;Write-Host&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Message&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-ForegroundColor&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Green&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;#run the scriptblock if specified&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($scriptblock)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;    
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Invoke-Command&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-ScriptBlock&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$Scriptblock&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;Write-Warning&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Countdown aborted&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$Message&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ForegroundColor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Green&lt;/span&gt;
+    &lt;span class=&#34;c&#34;&gt;#run the scriptblock if specified&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$scriptblock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;    
+        &lt;span class=&#34;nb&#34;&gt;Invoke-Command&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ScriptBlock&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$Scriptblock&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;Write-Warning&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Countdown aborted&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;#end function&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$sb&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{Stop-AzureVM&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Name&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURVMNAME&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-ServiceName&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURSERVICENAME&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Force}&lt;/span&gt;
- &lt;span style=&#34;color: #f8f8f2&#34;&gt;Add-Type&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-path&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;c:\Twilio.Api.dll&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;Add-Type&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-path&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;c:\RestSharp.dll&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$twilio&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;new-object&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Twilio.TwilioRestClient(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURACCOUNTSID&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURAUTHTOKEN&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$msg&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$twilio.SendSmsMessage(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURTWILLIONUMBER&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YOURCELLPHONENUMBER&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;VM about to shutdown&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;Start-Countdown&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;900&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Scriptblock&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$sb&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-ProgressBar&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Clear&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;#end function&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$sb&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Stop-AzureVM&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURVMNAME&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ServiceName&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURSERVICENAME&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+ &lt;span class=&#34;nb&#34;&gt;Add-Type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;c:\Twilio.Api.dll&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;Add-Type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;c:\RestSharp.dll&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$twilio&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;new-object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Twilio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TwilioRestClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURACCOUNTSID&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURAUTHTOKEN&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$msg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$twilio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SendSmsMessage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURTWILLIONUMBER&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YOURCELLPHONENUMBER&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;VM about to shutdown&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;Start-Countdown&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;900&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Scriptblock&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$sb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ProgressBar&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;-Clear&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 </description>
@@ -323,7 +323,7 @@ An even better way to do it is to use an app setting to set the logging level.  
 
 &lt;p&gt;You only need a single line to shut down your azure VM&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Stop-AzureVM&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Name&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YourVMName&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-ServiceName&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;YourServiceName&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;-Force&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;Stop-AzureVM&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YourVMName&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ServiceName&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;YourServiceName&amp;quot;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 

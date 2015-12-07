@@ -32,6 +32,7 @@
 
   <link href="/favicon.ico" rel="icon">
   <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/codehilite.css"  rel="stylesheet" type="text/css">
   <script src="/js/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
@@ -123,10 +124,10 @@ estynedwards
 <h2 id="step-2-get-the-twillio-and-restsharp-dll:0716029e4afe5b7c2e2968be46ffbacd">Step 2: Get the Twillio and RestSharp dll</h2>
 
 <p>In order to use Twillio from powershell we will need to have a copy of  Twillio.API.dll which has a dependency on  RestSharp.dll so we will need that as well.  I&rsquo;ve found NuGet to be the easiest way to get both.
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Install-Package</span> <span style="color: #f8f8f2">Twilio</span>
+<div class="highlight"><pre><span class="n">Install-Package</span> <span class="n">Twilio</span>
 </pre></div>
 
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Install-Package</span> <span style="color: #f8f8f2">RestSharp`</span>
+<div class="highlight"><pre><span class="n">Install-Package</span> <span class="n">RestSharp</span><span class="p">`</span>
 </pre></div>
 </p>
 
@@ -134,10 +135,10 @@ estynedwards
 
 <h2 id="step-3-modify-the-script-to-send-an-sms-prior-to-shutting-down:0716029e4afe5b7c2e2968be46ffbacd">Step 3: Modify the script to send an SMS prior to shutting down</h2>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Add-Type</span> <span style="color: #f8f8f2">-path</span> <span style="color: #e6db74">&quot;c:\Twilio.Api.dll&quot;</span>
-<span style="color: #f8f8f2">Add-Type</span> <span style="color: #f8f8f2">-path</span> <span style="color: #e6db74">&quot;c:\RestSharp.dll&quot;</span>
-<span style="color: #f8f8f2">$twilio</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">new-object</span> <span style="color: #f8f8f2">Twilio.TwilioRestClient(</span><span style="color: #e6db74">&quot;YOURACCOUNTSID&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;YOURAUTHTOKEN&quot;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">$msg</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">$twilio.SendSmsMessage(</span><span style="color: #e6db74">&quot;YOURTWILLIONUMBER&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;YOURCELLPHONENUMBER&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;VM about to shutdown&quot;</span><span style="color: #f8f8f2">)</span>
+<p><div class="highlight"><pre><span class="nb">Add-Type</span> <span class="n">-path</span> <span class="s2">&quot;c:\Twilio.Api.dll&quot;</span>
+<span class="nb">Add-Type</span> <span class="n">-path</span> <span class="s2">&quot;c:\RestSharp.dll&quot;</span>
+<span class="nv">$twilio</span> <span class="p">=</span> <span class="nb">new-object</span> <span class="n">Twilio</span><span class="p">.</span><span class="n">TwilioRestClient</span><span class="p">(</span><span class="s2">&quot;YOURACCOUNTSID&quot;</span><span class="p">,</span> <span class="s2">&quot;YOURAUTHTOKEN&quot;</span><span class="p">)</span>
+<span class="nv">$msg</span> <span class="p">=</span> <span class="nv">$twilio</span><span class="p">.</span><span class="n">SendSmsMessage</span><span class="p">(</span><span class="s2">&quot;YOURTWILLIONUMBER&quot;</span><span class="p">,</span> <span class="s2">&quot;YOURCELLPHONENUMBER&quot;</span><span class="p">,</span> <span class="s2">&quot;VM about to shutdown&quot;</span><span class="p">)</span>
 </pre></div>
 </p>
 
@@ -147,189 +148,189 @@ estynedwards
 
 <p>I&rsquo;m using a nice script by <a href="http://jdhitsolutions.com/blog/2012/04/friday-fun-powershell-countdown/">Jeffery Hicks</a> that displays a nice countdown message on the screen before executing the shut down.  You can read his blog post to see how the script works.  The complete script is listed below, it sends an SMS then waits 15 minutes before executing the shut down command. The countdown can be interrupted with the esc key to prevent the shut down.</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">&lt;#</span>
-<span style="color: #75715e"> -----------------------------------------------------------------------------</span>
-<span style="color: #75715e"> Script: Countdown2.ps1</span>
-<span style="color: #75715e"> Version: 0.9</span>
-<span style="color: #75715e"> Author: Jeffery Hicks</span>
-<span style="color: #75715e">    http://jdhitsolutions.com/blog</span>
-<span style="color: #75715e">    http://twitter.com/JeffHicks</span>
-<span style="color: #75715e">    http://www.ScriptingGeek.com</span>
-<span style="color: #75715e"> Date: 4/27/2012</span>
-<span style="color: #75715e"> Keywords:</span>
-<span style="color: #75715e"> Comments:</span>
-<span style="color: #75715e"> This is a variation on the Start-Countdown script from Josh Atwell</span>
-<span style="color: #75715e"> (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep)</span>
+<p><div class="highlight"><pre><span class="cm">&lt;#</span>
+<span class="cm"> -----------------------------------------------------------------------------</span>
+<span class="cm"> Script: Countdown2.ps1</span>
+<span class="cm"> Version: 0.9</span>
+<span class="cm"> Author: Jeffery Hicks</span>
+<span class="cm">    http://jdhitsolutions.com/blog</span>
+<span class="cm">    http://twitter.com/JeffHicks</span>
+<span class="cm">    http://www.ScriptingGeek.com</span>
+<span class="cm"> Date: 4/27/2012</span>
+<span class="cm"> Keywords:</span>
+<span class="cm"> Comments:</span>
+<span class="cm"> This is a variation on the Start-Countdown script from Josh Atwell</span>
+<span class="cm"> (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep)</span>
 
-<span style="color: #75715e"> &quot;Those who forget to script are doomed to repeat their work.&quot;</span>
+<span class="cm"> &quot;Those who forget to script are doomed to repeat their work.&quot;</span>
 
-<span style="color: #75715e">  ****************************************************************</span>
-<span style="color: #75715e">  * DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED *</span>
-<span style="color: #75715e">  * THOROUGHLY IN A LAB ENVIRONMENT. USE AT YOUR OWN RISK.  IF   *</span>
-<span style="color: #75715e">  * YOU DO NOT UNDERSTAND WHAT THIS SCRIPT DOES OR HOW IT WORKS, *</span>
-<span style="color: #75715e">  * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *</span>
-<span style="color: #75715e">  ****************************************************************</span>
-<span style="color: #75715e"> -----------------------------------------------------------------------------</span>
-<span style="color: #75715e"> #&gt;</span>
+<span class="cm">  ****************************************************************</span>
+<span class="cm">  * DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED *</span>
+<span class="cm">  * THOROUGHLY IN A LAB ENVIRONMENT. USE AT YOUR OWN RISK.  IF   *</span>
+<span class="cm">  * YOU DO NOT UNDERSTAND WHAT THIS SCRIPT DOES OR HOW IT WORKS, *</span>
+<span class="cm">  * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *</span>
+<span class="cm">  ****************************************************************</span>
+<span class="cm"> -----------------------------------------------------------------------------</span>
+<span class="cm"> #&gt;</span>
  
-<span style="color: #f8f8f2">Import-Module</span> <span style="color: #e6db74">&quot;C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1&quot;</span>
-<span style="color: #66d9ef">Function</span> <span style="color: #f8f8f2">Start-Countdown</span> <span style="color: #f8f8f2">{</span>
-<span style="color: #75715e">&lt;#</span>
-<span style="color: #75715e">	</span><span style="color: #e6db74">.Synopsis</span><span style="color: #75715e"></span>
-<span style="color: #75715e">	 Initiates a countdown before running a command</span>
-<span style="color: #75715e">    </span>
-<span style="color: #75715e">    </span><span style="color: #e6db74">.Description</span><span style="color: #75715e">  </span>
-<span style="color: #75715e">     This is a variation on the Start-Countdown script from Josh Atwell</span>
-<span style="color: #75715e">     (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). </span>
-<span style="color: #75715e">     It can be used instead of Start-Sleep and provides a visual countdown </span>
-<span style="color: #75715e">     progress during &quot;sleep&quot; times. At the end of the countdown, your </span>
-<span style="color: #75715e">     command will execute. Press the ESC key any time during the countdown</span>
-<span style="color: #75715e">     to abort. </span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     USING START-COUNTDOWN IN THE POWERSHELL ISE</span>
-<span style="color: #75715e">     Results will vary slightly in the PowerShell ISE. If you use this in</span>
-<span style="color: #75715e">     the ISE, it is recommended to use -Clear. You also cannot use the ESC</span>
-<span style="color: #75715e">     key to abort the script if using the console. You&#39;ll need to press</span>
-<span style="color: #75715e">     Ctrl+C. If using the progress bar, there is a Stop button in the ISE.</span>
-<span style="color: #75715e">     If you abort in the ISE, you won&#39;t get the warning message.</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Parameter</span><span style="color: #75715e"> Seconds</span>
-<span style="color: #75715e">     The number of seconds to countdown. The default is 10.</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Parameter</span><span style="color: #75715e"> Scriptblock</span>
-<span style="color: #75715e">     A PowerShell scriptblock to execute at the end of the countdown.</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Parameter</span><span style="color: #75715e"> ProgressBar</span>
-<span style="color: #75715e">     Use a progress bar instead of the console.</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Parameter</span><span style="color: #75715e"> Clear</span>
-<span style="color: #75715e">     Clear the screen. Other wise, the countdown will use the current location.</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Parameter</span><span style="color: #75715e"> Message</span>
-<span style="color: #75715e">     The message to be displayed at the end of the countdown before any</span>
-<span style="color: #75715e">     scriptblock is executed.</span>
-<span style="color: #75715e">     	 </span>
-<span style="color: #75715e">	</span><span style="color: #e6db74">.Example</span><span style="color: #75715e"></span>
-<span style="color: #75715e">	 PS C:\&gt; Start-Countdown -Seconds 10 -clear</span>
-<span style="color: #75715e">	 </span>
-<span style="color: #75715e">	 This method will clear the screen and display descending seconds</span>
-<span style="color: #75715e">	</span>
-<span style="color: #75715e">	</span><span style="color: #e6db74">.Example</span><span style="color: #75715e"></span>
-<span style="color: #75715e">	 PS C:\&gt; Start-Countdown -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}</span>
-<span style="color: #75715e">	 </span>
-<span style="color: #75715e">	 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.</span>
-<span style="color: #75715e">	 	 </span>
-<span style="color: #75715e">	</span><span style="color: #e6db74">.Link</span><span style="color: #75715e"></span>
-<span style="color: #75715e">	 http://jdhitsolutions.com/blog</span>
-<span style="color: #75715e">     </span>
-<span style="color: #75715e">     </span><span style="color: #e6db74">.Link</span><span style="color: #75715e"></span>
-<span style="color: #75715e">     Write-Progress</span>
-<span style="color: #75715e">	</span>
-<span style="color: #75715e">#&gt;</span>
-<span style="color: #66d9ef">Param</span><span style="color: #f8f8f2">(</span>
-<span style="color: #f8f8f2">[</span><span style="color: #66d9ef">Parameter</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">Position</span><span style="color: #f8f8f2">=0,</span><span style="color: #66d9ef">HelpMessage</span><span style="color: #f8f8f2">=</span><span style="color: #e6db74">&quot;Enter seconds to countdown from&quot;</span><span style="color: #f8f8f2">)]</span>
-<span style="color: #66d9ef">[Int]</span><span style="color: #f8f8f2">$Seconds</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">10,</span>
-<span style="color: #f8f8f2">[</span><span style="color: #66d9ef">Parameter</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">Position</span><span style="color: #f8f8f2">=1,</span><span style="color: #66d9ef">Mandatory</span><span style="color: #f8f8f2">=$False,</span>
-<span style="color: #66d9ef">HelpMessage</span><span style="color: #f8f8f2">=</span><span style="color: #e6db74">&quot;Enter a scriptblock to execute at the end of the countdown&quot;</span><span style="color: #f8f8f2">)]</span>
-<span style="color: #66d9ef">[scriptblock]</span><span style="color: #f8f8f2">$Scriptblock,</span>
-<span style="color: #66d9ef">[Switch]</span><span style="color: #f8f8f2">$ProgressBar,</span>
-<span style="color: #66d9ef">[Switch]</span><span style="color: #f8f8f2">$Clear,</span>
-<span style="color: #66d9ef">[String]</span><span style="color: #f8f8f2">$Message</span> <span style="color: #f8f8f2">=</span> <span style="color: #e6db74">&quot;Sutting down VM&quot;</span>
-<span style="color: #f8f8f2">)</span>
+<span class="nb">Import-Module</span> <span class="s2">&quot;C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1&quot;</span>
+<span class="k">Function</span> <span class="nb">Start-Countdown</span> <span class="p">{</span>
+<span class="cm">&lt;#</span>
+<span class="cm">	</span><span class="sd">.Synopsis</span><span class="cm"></span>
+<span class="cm">	 Initiates a countdown before running a command</span>
+<span class="cm">    </span>
+<span class="cm">    </span><span class="sd">.Description</span><span class="cm">  </span>
+<span class="cm">     This is a variation on the Start-Countdown script from Josh Atwell</span>
+<span class="cm">     (http://www.vtesseract.com/post/21414227113/start-countdown-function-a-visual-for-start-sleep). </span>
+<span class="cm">     It can be used instead of Start-Sleep and provides a visual countdown </span>
+<span class="cm">     progress during &quot;sleep&quot; times. At the end of the countdown, your </span>
+<span class="cm">     command will execute. Press the ESC key any time during the countdown</span>
+<span class="cm">     to abort. </span>
+<span class="cm">     </span>
+<span class="cm">     USING START-COUNTDOWN IN THE POWERSHELL ISE</span>
+<span class="cm">     Results will vary slightly in the PowerShell ISE. If you use this in</span>
+<span class="cm">     the ISE, it is recommended to use -Clear. You also cannot use the ESC</span>
+<span class="cm">     key to abort the script if using the console. You&#39;ll need to press</span>
+<span class="cm">     Ctrl+C. If using the progress bar, there is a Stop button in the ISE.</span>
+<span class="cm">     If you abort in the ISE, you won&#39;t get the warning message.</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Parameter</span><span class="cm"> Seconds</span>
+<span class="cm">     The number of seconds to countdown. The default is 10.</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Parameter</span><span class="cm"> Scriptblock</span>
+<span class="cm">     A PowerShell scriptblock to execute at the end of the countdown.</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Parameter</span><span class="cm"> ProgressBar</span>
+<span class="cm">     Use a progress bar instead of the console.</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Parameter</span><span class="cm"> Clear</span>
+<span class="cm">     Clear the screen. Other wise, the countdown will use the current location.</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Parameter</span><span class="cm"> Message</span>
+<span class="cm">     The message to be displayed at the end of the countdown before any</span>
+<span class="cm">     scriptblock is executed.</span>
+<span class="cm">     	 </span>
+<span class="cm">	</span><span class="sd">.Example</span><span class="cm"></span>
+<span class="cm">	 PS C:\&gt; Start-Countdown -Seconds 10 -clear</span>
+<span class="cm">	 </span>
+<span class="cm">	 This method will clear the screen and display descending seconds</span>
+<span class="cm">	</span>
+<span class="cm">	</span><span class="sd">.Example</span><span class="cm"></span>
+<span class="cm">	 PS C:\&gt; Start-Countdown -Seconds 30 -ProgressBar -scriptblock {get-service -comp (get-content computers.txt)}</span>
+<span class="cm">	 </span>
+<span class="cm">	 This method will display a progress bar on screen. At the end of the countdown the scriptblock will execute.</span>
+<span class="cm">	 	 </span>
+<span class="cm">	</span><span class="sd">.Link</span><span class="cm"></span>
+<span class="cm">	 http://jdhitsolutions.com/blog</span>
+<span class="cm">     </span>
+<span class="cm">     </span><span class="sd">.Link</span><span class="cm"></span>
+<span class="cm">     Write-Progress</span>
+<span class="cm">	</span>
+<span class="cm">#&gt;</span>
+<span class="k">Param</span><span class="p">(</span>
+<span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Position</span><span class="p">=</span><span class="n">0</span><span class="p">,</span><span class="k">HelpMessage</span><span class="p">=</span><span class="s2">&quot;Enter seconds to countdown from&quot;</span><span class="p">)]</span>
+<span class="no">[Int]</span><span class="nv">$Seconds</span> <span class="p">=</span> <span class="n">10</span><span class="p">,</span>
+<span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Position</span><span class="p">=</span><span class="n">1</span><span class="p">,</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$False</span><span class="p">,</span>
+<span class="k">HelpMessage</span><span class="p">=</span><span class="s2">&quot;Enter a scriptblock to execute at the end of the countdown&quot;</span><span class="p">)]</span>
+<span class="no">[scriptblock]</span><span class="nv">$Scriptblock</span><span class="p">,</span>
+<span class="no">[Switch]</span><span class="nv">$ProgressBar</span><span class="p">,</span>
+<span class="no">[Switch]</span><span class="nv">$Clear</span><span class="p">,</span>
+<span class="no">[String]</span><span class="nv">$Message</span> <span class="p">=</span> <span class="s2">&quot;Sutting down VM&quot;</span>
+<span class="p">)</span>
 
-<span style="color: #75715e">#save beginning value for total seconds</span>
-<span style="color: #f8f8f2">$TotalSeconds=$Seconds</span>
+<span class="c">#save beginning value for total seconds</span>
+<span class="nv">$TotalSeconds</span><span class="p">=</span><span class="nv">$Seconds</span>
 
-<span style="color: #75715e">#get current cursor position</span>
-<span style="color: #f8f8f2">$Coordinate</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">New-Object</span> <span style="color: #f8f8f2">System.Management.Automation.Host.Coordinates</span>
-<span style="color: #f8f8f2">$Coordinate.X=$host.ui.rawui.CursorPosition.X</span>
-<span style="color: #f8f8f2">$Coordinate.Y=$host.ui.rawui.CursorPosition.Y</span>
+<span class="c">#get current cursor position</span>
+<span class="nv">$Coordinate</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">Host</span><span class="p">.</span><span class="n">Coordinates</span>
+<span class="nv">$Coordinate</span><span class="p">.</span><span class="n">X</span><span class="p">=</span><span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">CursorPosition</span><span class="p">.</span><span class="n">X</span>
+<span class="nv">$Coordinate</span><span class="p">.</span><span class="n">Y</span><span class="p">=</span><span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">CursorPosition</span><span class="p">.</span><span class="n">Y</span>
 
-<span style="color: #66d9ef">If</span> <span style="color: #f8f8f2">($clear)</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">Clear-Host</span>
-    <span style="color: #75715e">#find the middle of the current window</span>
-    <span style="color: #f8f8f2">$Coordinate.X=</span><span style="color: #66d9ef">[int]</span><span style="color: #f8f8f2">($host.ui.rawui.WindowSize.Width/2)</span>
-    <span style="color: #f8f8f2">$Coordinate.Y=</span><span style="color: #66d9ef">[int]</span><span style="color: #f8f8f2">($host.ui.rawui.WindowSize.Height/2)</span>
-<span style="color: #f8f8f2">}</span>
+<span class="k">If</span> <span class="p">(</span><span class="nv">$clear</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Clear-Host</span>
+    <span class="c">#find the middle of the current window</span>
+    <span class="nv">$Coordinate</span><span class="p">.</span><span class="n">X</span><span class="p">=</span><span class="no">[int]</span><span class="p">(</span><span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">WindowSize</span><span class="p">.</span><span class="n">Width</span><span class="p">/</span><span class="n">2</span><span class="p">)</span>
+    <span class="nv">$Coordinate</span><span class="p">.</span><span class="n">Y</span><span class="p">=</span><span class="no">[int]</span><span class="p">(</span><span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">WindowSize</span><span class="p">.</span><span class="n">Height</span><span class="p">/</span><span class="n">2</span><span class="p">)</span>
+<span class="p">}</span>
 
-<span style="color: #75715e">#define the Escape key</span>
-<span style="color: #f8f8f2">$ESCKey</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">27</span>
+<span class="c">#define the Escape key</span>
+<span class="nv">$ESCKey</span> <span class="p">=</span> <span class="n">27</span>
 
-<span style="color: #75715e">#define a variable indicating if the user aborted the countdown</span>
-<span style="color: #f8f8f2">$Abort=$False</span>
+<span class="c">#define a variable indicating if the user aborted the countdown</span>
+<span class="nv">$Abort</span><span class="p">=</span><span class="nv">$False</span>
 
-<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">($seconds</span> <span style="color: #f92672">-ge</span> <span style="color: #f8f8f2">1)</span> <span style="color: #f8f8f2">{</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$seconds</span> <span class="o">-ge</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
 
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($host.ui.RawUi.KeyAvailable)</span>
-    		<span style="color: #f8f8f2">{</span>
-    		<span style="color: #f8f8f2">$key</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">$host.ui.RawUI.ReadKey(</span><span style="color: #e6db74">&quot;NoEcho,IncludeKeyUp,IncludeKeyDown&quot;</span><span style="color: #f8f8f2">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">RawUi</span><span class="p">.</span><span class="n">KeyAvailable</span><span class="p">)</span>
+    		<span class="p">{</span>
+    		<span class="nv">$key</span> <span class="p">=</span> <span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">RawUI</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">(</span><span class="s2">&quot;NoEcho,IncludeKeyUp,IncludeKeyDown&quot;</span><span class="p">)</span>
 
-    		<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($key.VirtualKeyCode</span> <span style="color: #f92672">-eq</span> <span style="color: #f8f8f2">$ESCkey)</span>
-    			<span style="color: #f8f8f2">{</span>
-                <span style="color: #75715e">#ESC was pressed so quit the countdown and set abort flag to True</span>
-    			<span style="color: #f8f8f2">$Seconds</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">0</span>
-                <span style="color: #f8f8f2">$Abort=$True</span> 
-    			<span style="color: #f8f8f2">}</span>
-    		<span style="color: #f8f8f2">}</span>
+    		<span class="k">if</span> <span class="p">(</span><span class="nv">$key</span><span class="p">.</span><span class="n">VirtualKeyCode</span> <span class="o">-eq</span> <span class="nv">$ESCkey</span><span class="p">)</span>
+    			<span class="p">{</span>
+                <span class="c">#ESC was pressed so quit the countdown and set abort flag to True</span>
+    			<span class="nv">$Seconds</span> <span class="p">=</span> <span class="n">0</span>
+                <span class="nv">$Abort</span><span class="p">=</span><span class="nv">$True</span> 
+    			<span class="p">}</span>
+    		<span class="p">}</span>
 
-    <span style="color: #66d9ef">If</span><span style="color: #f8f8f2">($ProgressBar){</span>
-        <span style="color: #75715e">#calculate percent time remaining, but in reverse so the progress bar</span>
-        <span style="color: #75715e">#moves from left to right</span>
-        <span style="color: #f8f8f2">$percent=100</span> <span style="color: #f8f8f2">-</span> <span style="color: #f8f8f2">($seconds/$TotalSeconds)*100</span>
-    	<span style="color: #f8f8f2">Write-Progress</span> <span style="color: #f8f8f2">-Activity</span> <span style="color: #e6db74">&quot;Countdown&quot;</span> <span style="color: #f8f8f2">-SecondsRemaining</span> <span style="color: #f8f8f2">$Seconds</span> <span style="color: #f8f8f2">-Status</span> <span style="color: #e6db74">&quot;Shutting doown in (esc to cancel)&quot;</span> <span style="color: #f8f8f2">-PercentComplete</span> <span style="color: #f8f8f2">$percent</span>
-    	<span style="color: #f8f8f2">Start-Sleep</span> <span style="color: #f8f8f2">-Seconds</span> <span style="color: #f8f8f2">1</span>
-    <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">Else</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($Clear)</span> <span style="color: #f8f8f2">{</span>
-          <span style="color: #f8f8f2">Clear-Host</span>
-        <span style="color: #f8f8f2">}</span> 
-        <span style="color: #f8f8f2">$host.ui.rawui.CursorPosition=$Coordinate</span>
-        <span style="color: #75715e">#write the seconds with padded trailing spaces to overwrite any extra digits such</span>
-        <span style="color: #75715e">#as moving from 10 to 9</span>
-        <span style="color: #f8f8f2">$pad=($TotalSeconds</span> <span style="color: #f92672">-as</span> <span style="color: #66d9ef">[string]</span><span style="color: #f8f8f2">).Length</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($seconds</span> <span style="color: #f92672">-le</span> <span style="color: #f8f8f2">10)</span> <span style="color: #f8f8f2">{</span>
-            <span style="color: #f8f8f2">$color=</span><span style="color: #e6db74">&quot;Red&quot;</span>
-        <span style="color: #f8f8f2">}</span>
-        <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
-            <span style="color: #f8f8f2">$color=</span><span style="color: #e6db74">&quot;Green&quot;</span>
-        <span style="color: #f8f8f2">}</span>
-        <span style="color: #f8f8f2">Write-Host</span> <span style="color: #e6db74">&quot;ESC to cancel: </span><span style="color: #f8f8f2">$((</span><span style="color: #66d9ef">[string]</span><span style="color: #f8f8f2">$Seconds).Padright($pad))</span><span style="color: #e6db74">&quot;</span> <span style="color: #f8f8f2">-foregroundcolor</span> <span style="color: #f8f8f2">$color</span>
-    	<span style="color: #f8f8f2">Start-Sleep</span> <span style="color: #f8f8f2">-Seconds</span> <span style="color: #f8f8f2">1</span>
-    <span style="color: #f8f8f2">}</span>
-    <span style="color: #75715e">#decrement $Seconds</span>
-    <span style="color: #f8f8f2">$Seconds--</span>
-<span style="color: #f8f8f2">}</span> <span style="color: #75715e">#while</span>
+    <span class="k">If</span><span class="p">(</span><span class="nv">$ProgressBar</span><span class="p">){</span>
+        <span class="c">#calculate percent time remaining, but in reverse so the progress bar</span>
+        <span class="c">#moves from left to right</span>
+        <span class="nv">$percent</span><span class="p">=</span><span class="n">100</span> <span class="p">-</span> <span class="p">(</span><span class="nv">$seconds</span><span class="p">/</span><span class="nv">$TotalSeconds</span><span class="p">)*</span><span class="n">100</span>
+    	<span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&quot;Countdown&quot;</span> <span class="n">-SecondsRemaining</span> <span class="nv">$Seconds</span> <span class="n">-Status</span> <span class="s2">&quot;Shutting doown in (esc to cancel)&quot;</span> <span class="n">-PercentComplete</span> <span class="nv">$percent</span>
+    	<span class="nb">Start-Sleep</span> <span class="n">-Seconds</span> <span class="n">1</span>
+    <span class="p">}</span> <span class="k">Else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$Clear</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">Clear-Host</span>
+        <span class="p">}</span> 
+        <span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">CursorPosition</span><span class="p">=</span><span class="nv">$Coordinate</span>
+        <span class="c">#write the seconds with padded trailing spaces to overwrite any extra digits such</span>
+        <span class="c">#as moving from 10 to 9</span>
+        <span class="nv">$pad</span><span class="p">=(</span><span class="nv">$TotalSeconds</span> <span class="o">-as</span> <span class="no">[string]</span><span class="p">).</span><span class="n">Length</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$seconds</span> <span class="o">-le</span> <span class="n">10</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$color</span><span class="p">=</span><span class="s2">&quot;Red&quot;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$color</span><span class="p">=</span><span class="s2">&quot;Green&quot;</span>
+        <span class="p">}</span>
+        <span class="nb">Write-Host</span> <span class="s2">&quot;ESC to cancel: </span><span class="p">$((</span><span class="no">[string]</span><span class="nv">$Seconds</span><span class="p">).</span><span class="n">Padright</span><span class="p">(</span><span class="nv">$pad</span><span class="p">))</span><span class="s2">&quot;</span> <span class="n">-foregroundcolor</span> <span class="nv">$color</span>
+    	<span class="nb">Start-Sleep</span> <span class="n">-Seconds</span> <span class="n">1</span>
+    <span class="p">}</span>
+    <span class="c">#decrement $Seconds</span>
+    <span class="nv">$Seconds</span><span class="p">--</span>
+<span class="p">}</span> <span class="c">#while</span>
 
-<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($Progress)</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #75715e">#set progress to complete</span>
-        <span style="color: #f8f8f2">Write-Progress</span> <span style="color: #f8f8f2">-Completed</span>
-    <span style="color: #f8f8f2">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$Progress</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c">#set progress to complete</span>
+        <span class="nb">Write-Progress</span> <span class="n">-Completed</span>
+    <span class="p">}</span>
 
-<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">-Not</span> <span style="color: #f8f8f2">$Abort)</span> <span style="color: #f8f8f2">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">-Not</span> <span class="nv">$Abort</span><span class="p">)</span> <span class="p">{</span>
     
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($clear)</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #75715e">#if $Clear was used, center the message in the console</span>
-        <span style="color: #f8f8f2">$Coordinate.X=$Coordinate.X</span> <span style="color: #f8f8f2">-</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">[int]</span><span style="color: #f8f8f2">($message.Length)/2)</span>
-    <span style="color: #f8f8f2">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$clear</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c">#if $Clear was used, center the message in the console</span>
+        <span class="nv">$Coordinate</span><span class="p">.</span><span class="n">X</span><span class="p">=</span><span class="nv">$Coordinate</span><span class="p">.</span><span class="n">X</span> <span class="p">-</span> <span class="p">(</span><span class="no">[int]</span><span class="p">(</span><span class="nv">$message</span><span class="p">.</span><span class="n">Length</span><span class="p">)/</span><span class="n">2</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    <span style="color: #f8f8f2">$host.ui.rawui.CursorPosition=$Coordinate</span>
+    <span class="nv">$host</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">rawui</span><span class="p">.</span><span class="n">CursorPosition</span><span class="p">=</span><span class="nv">$Coordinate</span>
     
-    <span style="color: #f8f8f2">Write-Host</span> <span style="color: #f8f8f2">$Message</span> <span style="color: #f8f8f2">-ForegroundColor</span> <span style="color: #f8f8f2">Green</span>
-    <span style="color: #75715e">#run the scriptblock if specified</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($scriptblock)</span> <span style="color: #f8f8f2">{</span>    
-        <span style="color: #f8f8f2">Invoke-Command</span> <span style="color: #f8f8f2">-ScriptBlock</span> <span style="color: #f8f8f2">$Scriptblock</span>
-    <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">Write-Warning</span> <span style="color: #e6db74">&quot;Countdown aborted&quot;</span>
-<span style="color: #f8f8f2">}</span>
+    <span class="nb">Write-Host</span> <span class="nv">$Message</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+    <span class="c">#run the scriptblock if specified</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$scriptblock</span><span class="p">)</span> <span class="p">{</span>    
+        <span class="nb">Invoke-Command</span> <span class="n">-ScriptBlock</span> <span class="nv">$Scriptblock</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="nb">Write-Warning</span> <span class="s2">&quot;Countdown aborted&quot;</span>
+<span class="p">}</span>
 
-<span style="color: #f8f8f2">}</span> <span style="color: #75715e">#end function</span>
-<span style="color: #f8f8f2">$sb</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">{Stop-AzureVM</span> <span style="color: #f8f8f2">-Name</span> <span style="color: #e6db74">&quot;YOURVMNAME&quot;</span> <span style="color: #f8f8f2">-ServiceName</span> <span style="color: #e6db74">&quot;YOURSERVICENAME&quot;</span> <span style="color: #f8f8f2">-Force}</span>
- <span style="color: #f8f8f2">Add-Type</span> <span style="color: #f8f8f2">-path</span> <span style="color: #e6db74">&quot;c:\Twilio.Api.dll&quot;</span>
-    <span style="color: #f8f8f2">Add-Type</span> <span style="color: #f8f8f2">-path</span> <span style="color: #e6db74">&quot;c:\RestSharp.dll&quot;</span>
-    <span style="color: #f8f8f2">$twilio</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">new-object</span> <span style="color: #f8f8f2">Twilio.TwilioRestClient(</span><span style="color: #e6db74">&quot;YOURACCOUNTSID&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;YOURAUTHTOKEN&quot;</span><span style="color: #f8f8f2">)</span>
-    <span style="color: #f8f8f2">$msg</span> <span style="color: #f8f8f2">=</span> <span style="color: #f8f8f2">$twilio.SendSmsMessage(</span><span style="color: #e6db74">&quot;YOURTWILLIONUMBER&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;YOURCELLPHONENUMBER&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;VM about to shutdown&quot;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">Start-Countdown</span> <span style="color: #f8f8f2">900</span> <span style="color: #f8f8f2">-Scriptblock</span> <span style="color: #f8f8f2">$sb</span> <span style="color: #f8f8f2">-ProgressBar</span>  <span style="color: #f8f8f2">-Clear</span>
+<span class="p">}</span> <span class="c">#end function</span>
+<span class="nv">$sb</span> <span class="p">=</span> <span class="p">{</span><span class="nb">Stop-AzureVM</span> <span class="n">-Name</span> <span class="s2">&quot;YOURVMNAME&quot;</span> <span class="n">-ServiceName</span> <span class="s2">&quot;YOURSERVICENAME&quot;</span> <span class="n">-Force</span><span class="p">}</span>
+ <span class="nb">Add-Type</span> <span class="n">-path</span> <span class="s2">&quot;c:\Twilio.Api.dll&quot;</span>
+    <span class="nb">Add-Type</span> <span class="n">-path</span> <span class="s2">&quot;c:\RestSharp.dll&quot;</span>
+    <span class="nv">$twilio</span> <span class="p">=</span> <span class="nb">new-object</span> <span class="n">Twilio</span><span class="p">.</span><span class="n">TwilioRestClient</span><span class="p">(</span><span class="s2">&quot;YOURACCOUNTSID&quot;</span><span class="p">,</span> <span class="s2">&quot;YOURAUTHTOKEN&quot;</span><span class="p">)</span>
+    <span class="nv">$msg</span> <span class="p">=</span> <span class="nv">$twilio</span><span class="p">.</span><span class="n">SendSmsMessage</span><span class="p">(</span><span class="s2">&quot;YOURTWILLIONUMBER&quot;</span><span class="p">,</span> <span class="s2">&quot;YOURCELLPHONENUMBER&quot;</span><span class="p">,</span> <span class="s2">&quot;VM about to shutdown&quot;</span><span class="p">)</span>
+<span class="nb">Start-Countdown</span> <span class="n">900</span> <span class="n">-Scriptblock</span> <span class="nv">$sb</span> <span class="n">-ProgressBar</span>  <span class="n">-Clear</span>
 </pre></div>
 </p>
 
@@ -352,6 +353,11 @@ estynedwards
   <ul class="divided">
     
 	 <li class="post">
+        <a href="http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/">Using a JQuery Plugin in Angular 2</a>
+		
+      </li>
+	
+	 <li class="post">
         <a href="http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/">Using Geny Motion for Xamarin Android Development in a VM</a>
 		
       </li>
@@ -368,11 +374,6 @@ estynedwards
 	
 	 <li class="post">
         <a href="http://estynedwards.com/blog/2013/09/03/auto-shutdown-for-windows-azure-vm/">Auto Shutdown For Windows Azure VM</a>
-		
-      </li>
-	
-	 <li class="post">
-        <a href="http://estynedwards.com/"></a>
 		
       </li>
 	
