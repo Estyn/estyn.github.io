@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+
+
+<html class="no-js" lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="author" content="">
+  <meta name="keywords" content="awesome, definitely"> 
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:title" content="">
+  <meta property="og:url" content="">
+  <meta property="og:description" content=""> 
+  <meta property="og:type" content="website" />  
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="canonical" href="" />
+
+  <link href="/favicon.ico" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/codehilite.css"  rel="stylesheet" type="text/css">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))
+  </script>
+  
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+</head>
+<body>
+
+  <header>
+    <div class="grid-wrapper">
+  <div class="grid">
+
+    <div class="grid__item two-fifths lap-four-sixths palm-one-whole">
+      <a href="http://estynedwards.com/" class="site-title">Estyn&#39;s Blog</a>
+    </div>
+
+    <div class="grid__item three-fifths lap-two-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+<ul class="menu pull-right">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/">Blog</a></li>
+</ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  </header>
+
+
+
+  <div class="grid-wrapper">
+    <div class="grid grid-center">
+
+      <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+
+        <article class="post">
+          <header>
+
+            <h1 class="title indent"> Using IdentityServer 4 with ServiceStack and Angular</h1>
+            <div class="meta clearfix">
+              <time class="pull-left" datetime="2014-01-15T07:33:19+00:00" pubdate="" data-updated="true"><i class="icon-calendar"></i> Sat Jan 30, 2016</time>
+
+              <div class="pull-left">
+                <i class="icon-tags"></i>
+                <ul class="tags unstyled">
+                  
+                  <i class="fa fa-tag"></i> 
+                  <li><a href="/categories/Angluar%20ServiceStack/">Angluar ServiceStack</a></li>
+                   
+                </ul>
+              </div>
+            </div>
+          </header>
+          
+  
+asds
+
+Estyn Edwards
+
+estyn
+
+estyn
+
+estynedwards
+
+          
+          
+
+<p>We&rsquo;ve looking to use a custom OAuth/OpenID provider for a few of our projects and after reviewing the options available we decided to use Identity Server as it looked to be the most stable and feature rich.  Currently we use ServiceStack for our backend and while ServiceStack has build in support for OAuth and OpenID it doesn&rsquo;t appear to have any support for OpenId Connect.  And while we will be using OAuth tokens we will be using the OpenId Connect configuration endpoints for configuration.</p>
+
+<h1 id="step-1-setup-identity-server:2de7eaf0e63123158caf7bb21beed240">Step 1: Setup Identity Server</h1>
+
+<p>I&rsquo;m not going to go into too much detail here as there are plenty of good tutorials and blog posts on how to setup identity server already.  We chose to go with Identity Server 4 as it runs on asp.net core.</p>
+
+<p>Here is the code I used to configure Identity Server:
+<div class="highlight"><pre>    <span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">//TODO: This is the demo cert, replace with our own</span>
+            <span class="kt">var</span> <span class="n">cert</span> <span class="p">=</span> <span class="k">new</span> <span class="n">X509Certificate2</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">_environment</span><span class="p">.</span><span class="n">ApplicationBasePath</span><span class="p">,</span> <span class="s">&quot;idsrv4test.pfx&quot;</span><span class="p">),</span> <span class="s">&quot;idsrv3test&quot;</span><span class="p">);</span>
+
+            <span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="n">services</span><span class="p">.</span><span class="n">AddIdentityServer</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">SigningCertificate</span> <span class="p">=</span> <span class="n">cert</span><span class="p">;</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">SiteName</span> <span class="p">=</span> <span class="s">&quot;Punchcard Identity Server (STS)&quot;</span><span class="p">;</span>
+            <span class="p">});</span>
+
+            <span class="n">builder</span><span class="p">.</span><span class="n">AddInMemoryClients</span><span class="p">(</span><span class="n">Clients</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+            <span class="n">builder</span><span class="p">.</span><span class="n">AddInMemoryScopes</span><span class="p">(</span><span class="n">Scopes</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+            <span class="n">builder</span><span class="p">.</span><span class="n">AddInMemoryUsers</span><span class="p">(</span><span class="n">Users</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+            <span class="n">builder</span><span class="p">.</span><span class="n">AddCustomGrantValidator</span><span class="p">&lt;</span><span class="n">CustomGrantValidator</span><span class="p">&gt;();</span>
+
+            <span class="c1">// for the UI</span>
+            <span class="n">services</span>
+                <span class="p">.</span><span class="n">AddMvc</span><span class="p">()</span>
+                <span class="p">.</span><span class="n">AddRazorOptions</span><span class="p">(</span><span class="n">razor</span> <span class="p">=&gt;</span>
+                <span class="p">{</span>
+                    <span class="n">razor</span><span class="p">.</span><span class="n">ViewLocationExpanders</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">IdSvrHost</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">CustomViewLocationExpander</span><span class="p">());</span>
+                <span class="p">});</span>
+            <span class="n">services</span><span class="p">.</span><span class="n">AddTransient</span><span class="p">&lt;</span><span class="n">IdSvrHost</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Login</span><span class="p">.</span><span class="n">LoginService</span><span class="p">&gt;();</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">ILoggerFactory</span> <span class="n">loggerFactory</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">loggerFactory</span><span class="p">.</span><span class="n">AddConsole</span><span class="p">(</span><span class="n">LogLevel</span><span class="p">.</span><span class="n">Verbose</span><span class="p">);</span>
+            <span class="n">loggerFactory</span><span class="p">.</span><span class="n">AddDebug</span><span class="p">(</span><span class="n">LogLevel</span><span class="p">.</span><span class="n">Verbose</span><span class="p">);</span>
+            <span class="c1">// For Test only change in prod</span>
+            <span class="n">app</span><span class="p">.</span><span class="n">UseCors</span><span class="p">(</span><span class="n">builder</span> <span class="p">=&gt;</span>
+                            <span class="n">builder</span><span class="p">.</span><span class="n">AllowAnyOrigin</span><span class="p">().</span><span class="n">AllowAnyHeader</span><span class="p">().</span><span class="n">AllowAnyMethod</span><span class="p">().</span><span class="n">AllowCredentials</span><span class="p">());</span> 
+            <span class="n">app</span><span class="p">.</span><span class="n">UseDeveloperExceptionPage</span><span class="p">();</span>
+            <span class="n">app</span><span class="p">.</span><span class="n">UseIISPlatformHandler</span><span class="p">();</span>
+            <span class="n">app</span><span class="p">.</span><span class="n">UseIdentityServer</span><span class="p">();</span>
+            <span class="n">app</span><span class="p">.</span><span class="n">UseStaticFiles</span><span class="p">();</span>
+            <span class="n">app</span><span class="p">.</span><span class="n">UseMvcWithDefaultRoute</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></div>
+</p>
+
+<p>And the client configuration for identity server:
+<div class="highlight"><pre>    <span class="c1">///////////////////////////////////////////</span>
+    <span class="c1">// JS OIDC Sample</span>
+    <span class="c1">//////////////////////////////////////////</span>
+    <span class="k">new</span> <span class="n">Client</span>
+    <span class="p">{</span>
+        <span class="n">ClientId</span> <span class="p">=</span> <span class="s">&quot;js_oidc&quot;</span><span class="p">,</span>
+        <span class="n">ClientName</span> <span class="p">=</span> <span class="s">&quot;JavaScript OIDC Client&quot;</span><span class="p">,</span>
+        <span class="n">ClientUri</span> <span class="p">=</span> <span class="s">&quot;http://identityserver.io&quot;</span><span class="p">,</span>
+
+        <span class="n">Flow</span> <span class="p">=</span> <span class="n">Flows</span><span class="p">.</span><span class="n">Implicit</span><span class="p">,</span>
+        <span class="n">RedirectUris</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="s">&quot;http://localhost:7017/index.html&quot;</span><span class="p">,</span>
+            <span class="s">&quot;http://localhost:7017/silent_renew.html&quot;</span><span class="p">,</span>
+
+            <span class="s">&quot;http://localhost:7200/callback.html&quot;</span>
+        <span class="p">},</span>
+        <span class="n">PostLogoutRedirectUris</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="s">&quot;http://localhost:7017/index.html&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+
+        <span class="n">AllowedCorsOrigins</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="s">&quot;http://localhost:7017&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span>
+        <span class="p">},</span>
+
+        <span class="n">AllowedScopes</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>
+        <span class="p">{</span>
+            <span class="n">StandardScopes</span><span class="p">.</span><span class="n">OpenId</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+            <span class="n">StandardScopes</span><span class="p">.</span><span class="n">Profile</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+            <span class="n">StandardScopes</span><span class="p">.</span><span class="n">Email</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+            <span class="n">StandardScopes</span><span class="p">.</span><span class="n">Roles</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+            <span class="s">&quot;api1&quot;</span><span class="p">,</span> <span class="s">&quot;api2&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</p>
+
+<h1 id="step-2-create-a-custom-authprovider-for-servicestack:2de7eaf0e63123158caf7bb21beed240">Step 2: Create a custom authprovider for ServiceStack</h1>
+
+<p>Next we created a custom Authentication Provider for Service Stack.  We plan on using the code in several different project so we&rsquo;d like the amount of configuration neccessary to use the provider to be minimal.  Luckily OpenID Connect provieds a discovery endpoint that can be used to retrieve the configuration from the server (including the public certificate).</p>
+
+<p>The goald is only have to provide the url of the discovery endpoint in order to use the provider.
+<div class="highlight"><pre>    <span class="n">Plugins</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">AuthFeature</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">AuthUserSession</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="n">IAuthProvider</span><span class="p">[]</span> <span class="p">{</span>
+                    <span class="k">new</span> <span class="nf">JsonWebTokenAuthProvider</span><span class="p">(</span><span class="s">&quot;http://localhost:22530/&quot;</span> <span class="p">+</span> <span class="s">&quot;.well-known/openid-configuration&quot;</span><span class="p">,</span> <span class="s">&quot;http://localhost:22530/resources&quot;</span><span class="p">),</span>
+            <span class="p">}));</span>
+</pre></div>
+</p>
+
+<p><div class="highlight"><pre>    <span class="k">public</span> <span class="k">class</span> <span class="nc">JsonWebTokenAuthProvider</span> <span class="p">:</span> <span class="n">AuthProvider</span><span class="p">,</span> <span class="n">IAuthWithRequest</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;JWT&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">Realm</span> <span class="p">=</span> <span class="s">&quot;/auth/JWT&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">MissingAuthHeader</span> <span class="p">=</span> <span class="s">&quot;Missing Authorization Header&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">InvalidAuthHeader</span> <span class="p">=</span> <span class="s">&quot;Invalid Authorization Header&quot;</span><span class="p">;</span>
+
+
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">Audience</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">Issuer</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">private</span> <span class="n">X509Certificate2</span> <span class="n">Certificate</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// Creates a new JsonWebToken Auth Provider</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name=&quot;discoveryEndpoint&quot;&gt;aThe url to get the configuration informaion from.. (er &quot;http://localhost:22530/&quot; + &quot;.well-known/openid-configuration&quot;)&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name=&quot;audience&quot;&gt;The client for openID (eg js_oidc)&lt;/param&gt;</span>
+
+        <span class="k">public</span> <span class="nf">JsonWebTokenAuthProvider</span><span class="p">(</span><span class="kt">string</span> <span class="n">discoveryEndpoint</span><span class="p">,</span> <span class="kt">string</span> <span class="n">audience</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Provider</span> <span class="p">=</span> <span class="n">Name</span><span class="p">;</span>
+            <span class="n">AuthRealm</span> <span class="p">=</span> <span class="n">Realm</span><span class="p">;</span>
+            <span class="n">Audience</span> <span class="p">=</span> <span class="n">audience</span><span class="p">;</span>
+            
+            <span class="kt">var</span> <span class="n">configurationManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConfigurationManager</span><span class="p">&lt;</span><span class="n">OpenIdConnectConfiguration</span><span class="p">&gt;(</span><span class="n">discoveryEndpoint</span><span class="p">);</span>
+
+            <span class="kt">var</span> <span class="n">config</span> <span class="p">=</span>  <span class="n">configurationManager</span><span class="p">.</span><span class="n">GetConfigurationAsync</span><span class="p">().</span><span class="n">Result</span><span class="p">;</span>
+
+            <span class="n">Certificate</span> <span class="p">=</span> <span class="k">new</span> <span class="n">X509Certificate2</span><span class="p">(</span><span class="n">Convert</span><span class="p">.</span><span class="n">FromBase64String</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">JsonWebKeySet</span><span class="p">.</span><span class="n">Keys</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">X5c</span><span class="p">.</span><span class="n">First</span><span class="p">()));</span>
+            <span class="n">Issuer</span> <span class="p">=</span> <span class="n">config</span><span class="p">.</span><span class="n">Issuer</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">object</span> <span class="nf">Authenticate</span><span class="p">(</span><span class="n">IServiceBase</span> <span class="n">authService</span><span class="p">,</span> <span class="n">IAuthSession</span> <span class="n">session</span><span class="p">,</span> <span class="n">Authenticate</span> <span class="n">request</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">header</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">oauth_token</span><span class="p">;</span>
+           
+            <span class="c1">// if no auth header, 401</span>
+            <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="n">HttpError</span><span class="p">.</span><span class="n">Unauthorized</span><span class="p">(</span><span class="n">MissingAuthHeader</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="kt">var</span> <span class="n">headerData</span> <span class="p">=</span> <span class="n">header</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">);</span>
+
+            <span class="c1">// if header is missing bearer portion, 401</span>
+            <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">headerData</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="s">&quot;BEARER&quot;</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">)</span> <span class="p">!=</span> <span class="m">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="n">HttpError</span><span class="p">.</span><span class="n">Unauthorized</span><span class="p">(</span><span class="n">InvalidAuthHeader</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">try</span>
+            <span class="p">{</span>
+               
+                <span class="c1">// set current principal to the validated token principal</span>
+                <span class="n">Thread</span><span class="p">.</span><span class="n">CurrentPrincipal</span> <span class="p">=</span> <span class="n">JsonWebToken</span><span class="p">.</span><span class="n">ValidateToken</span><span class="p">(</span><span class="n">headerData</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">Certificate</span><span class="p">,</span>  <span class="n">Audience</span><span class="p">,</span>  <span class="n">Issuer</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="c1">// set the current request&#39;s user the the decoded principal</span>
+                    <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">User</span> <span class="p">=</span> <span class="n">Thread</span><span class="p">.</span><span class="n">CurrentPrincipal</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="c1">// set the session&#39;s username to the logged in user</span>
+                <span class="n">session</span><span class="p">.</span><span class="n">UserName</span> <span class="p">=</span> <span class="n">Thread</span><span class="p">.</span><span class="n">CurrentPrincipal</span><span class="p">.</span><span class="n">Identity</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+
+                <span class="k">return</span> <span class="nf">OnAuthenticated</span><span class="p">(</span><span class="n">authService</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="k">new</span> <span class="n">AuthTokens</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;());</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">HttpError</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Unauthorized</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        
+        <span class="c1">/// &lt;param name=&quot;session&quot;&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name=&quot;tokens&quot;&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name=&quot;request&quot;&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">bool</span> <span class="nf">IsAuthorized</span><span class="p">(</span><span class="n">IAuthSession</span> <span class="n">session</span><span class="p">,</span> <span class="n">IAuthTokens</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">Authenticate</span> <span class="n">request</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">Identity</span><span class="p">.</span><span class="n">IsAuthenticated</span> <span class="p">&amp;&amp;</span> <span class="n">session</span><span class="p">.</span><span class="n">IsAuthenticated</span> <span class="p">&amp;&amp;</span> <span class="kt">string</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">UserName</span><span class="p">,</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">Identity</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">PreAuthenticate</span><span class="p">(</span><span class="n">IRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">IResponse</span> <span class="n">response</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">header</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">&quot;Authorization&quot;</span><span class="p">];</span>
+            <span class="kt">var</span> <span class="n">authService</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">TryResolve</span><span class="p">&lt;</span><span class="n">AuthenticateService</span><span class="p">&gt;();</span>
+            <span class="n">authService</span><span class="p">.</span><span class="n">Request</span> <span class="p">=</span> <span class="n">request</span><span class="p">;</span>
+
+            <span class="c1">// pass auth header in as oauth token to authentication</span>
+            <span class="n">authService</span><span class="p">.</span><span class="n">Post</span><span class="p">(</span><span class="k">new</span> <span class="n">Authenticate</span>
+            <span class="p">{</span>
+                <span class="n">provider</span> <span class="p">=</span> <span class="n">Name</span><span class="p">,</span>
+                <span class="n">oauth_token</span> <span class="p">=</span> <span class="n">header</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        
+    <span class="p">}</span>   
+ 
+</pre></div>
+</p>
+
+<p>We use the following class to handle the decoding and validating of the token&rdquo;</p>
+
+<p><div class="highlight"><pre> 
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">JsonWebToken</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">NameClaimType</span> <span class="p">=</span> <span class="s">&quot;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">RoleClaimType</span> <span class="p">=</span> <span class="s">&quot;http://schemas.microsoft.com/ws/2008/06/identity/claims/role&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">ActorClaimType</span> <span class="p">=</span> <span class="s">&quot;http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor&quot;</span><span class="p">;</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">StringClaimValueType</span> <span class="p">=</span> <span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="k">static</span> <span class="n">ClaimsPrincipal</span> <span class="nf">ValidateToken</span><span class="p">(</span><span class="kt">string</span> <span class="n">token</span><span class="p">,</span> <span class="n">X509Certificate2</span> <span class="n">certificate</span><span class="p">,</span> <span class="kt">string</span> <span class="n">audience</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="kt">string</span> <span class="n">issuer</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+
+            <span class="kt">var</span> <span class="n">claims</span> <span class="p">=</span> <span class="n">ValidateIdentityTokenAsync</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">audience</span><span class="p">,</span> <span class="n">certificate</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">ClaimsPrincipal</span><span class="p">(</span><span class="n">ClaimsIdentityFromJwt</span><span class="p">(</span><span class="n">claims</span><span class="p">,</span> <span class="n">issuer</span><span class="p">));</span>
+        <span class="p">}</span>
+
+
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">ClaimsIdentity</span> <span class="nf">ClaimsIdentityFromJwt</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Claim</span><span class="p">&gt;</span> <span class="n">claims</span><span class="p">,</span> <span class="kt">string</span> <span class="n">issuer</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">subject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClaimsIdentity</span><span class="p">(</span><span class="s">&quot;Federation&quot;</span><span class="p">,</span> <span class="n">NameClaimType</span><span class="p">,</span> <span class="n">RoleClaimType</span><span class="p">);</span>
+            <span class="c1">//var claims = ClaimsFromJwt(jwtData, issuer);</span>
+
+            <span class="k">foreach</span> <span class="p">(</span><span class="n">Claim</span> <span class="n">claim</span> <span class="k">in</span> <span class="n">claims</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">claim</span><span class="p">.</span><span class="n">Type</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="p">==</span> <span class="n">ActorClaimType</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="n">Actor</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidOperationException</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
+                            <span class="s">&quot;Jwt10401: Only a single &#39;Actor&#39; is supported. Found second claim of type: &#39;{0}&#39;, value: &#39;{1}&#39;&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">{</span> <span class="s">&quot;actor&quot;</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">Value</span> <span class="p">}));</span>
+                    <span class="p">}</span>
+
+                    <span class="n">subject</span><span class="p">.</span><span class="n">AddClaim</span><span class="p">(</span><span class="k">new</span> <span class="n">Claim</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">ValueType</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">subject</span><span class="p">));</span>
+
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="p">==</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">subject</span><span class="p">.</span><span class="n">AddClaim</span><span class="p">(</span><span class="k">new</span> <span class="n">Claim</span><span class="p">(</span><span class="n">NameClaimType</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">StringClaimValueType</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">issuer</span><span class="p">));</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="p">==</span> <span class="s">&quot;role&quot;</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">subject</span><span class="p">.</span><span class="n">AddClaim</span><span class="p">(</span><span class="k">new</span> <span class="n">Claim</span><span class="p">(</span><span class="n">RoleClaimType</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">StringClaimValueType</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">issuer</span><span class="p">));</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="kt">var</span> <span class="n">newClaim</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Claim</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">claim</span><span class="p">.</span><span class="n">ValueType</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">issuer</span><span class="p">,</span> <span class="n">subject</span><span class="p">);</span>
+
+                <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">prop</span> <span class="k">in</span> <span class="n">claim</span><span class="p">.</span><span class="n">Properties</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">newClaim</span><span class="p">.</span><span class="n">Properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">prop</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="n">subject</span><span class="p">.</span><span class="n">AddClaim</span><span class="p">(</span><span class="n">newClaim</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">subject</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Claim</span><span class="p">&gt;</span> <span class="n">ValidateIdentityTokenAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">token</span><span class="p">,</span> <span class="kt">string</span> <span class="n">audience</span><span class="p">,</span> <span class="n">X509Certificate2</span> <span class="n">certificate</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">parameters</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TokenValidationParameters</span>
+            <span class="p">{</span>
+                <span class="n">ValidAudience</span> <span class="p">=</span> <span class="n">audience</span><span class="p">,</span>
+                <span class="n">ValidIssuer</span> <span class="p">=</span> <span class="s">&quot;http://localhost:22530&quot;</span><span class="p">,</span>
+                <span class="n">IssuerSigningToken</span> <span class="p">=</span> <span class="k">new</span> <span class="n">X509SecurityToken</span><span class="p">(</span><span class="n">certificate</span><span class="p">)</span>
+
+            <span class="p">};</span>
+
+            <span class="kt">var</span> <span class="n">handler</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JwtSecurityTokenHandler</span><span class="p">();</span>
+            <span class="n">SecurityToken</span> <span class="n">jwt</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="n">id</span> <span class="p">=</span> <span class="n">handler</span><span class="p">.</span><span class="n">ValidateToken</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="k">out</span> <span class="n">jwt</span><span class="p">);</span>
+            
+            <span class="k">return</span> <span class="n">id</span><span class="p">.</span><span class="n">Claims</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+</pre></div>
+</p>
+
+<p>At this point we can use a tool like postman to send authenticated requests to service stack and out provider will correctly authorize the user.  While we are targetting access_tokens you can also validate the id_token if you pass that in instead, although that wouldn&rsquo;t really make a lot of sense unless all you are trying to do is authenticate the user.</p>
+
+<h1 id="step-3-angular:2de7eaf0e63123158caf7bb21beed240">Step 3 Angular</h1>
+
+<p>For angular we will use the OidcTokenManager library to handle the authentications flows.  All we need to do is hook the library up in a few places and ensure that we are passing the token on all calls to the server.</p>
+
+<p>First we configure OidcTokenManager:</p>
+
+<p><div class="highlight"><pre>    <span class="nx">angular</span>
+        <span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app.core&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;authService&#39;</span><span class="p">,</span> <span class="nx">authService</span><span class="p">);</span>
+
+    <span class="cm">/* @ngInject */</span>
+    <span class="kd">function</span> <span class="nx">authService</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">authority</span><span class="o">:</span> <span class="s2">&quot;http://localhost:22530/&quot;</span><span class="p">,</span>
+            <span class="nx">client_id</span><span class="o">:</span> <span class="s2">&quot;js_oidc&quot;</span><span class="p">,</span>
+            <span class="nx">redirect_uri</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">+</span> <span class="s2">&quot;/callback.html&quot;</span><span class="p">,</span>
+            <span class="nx">post_logout_redirect_uri</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">+</span> <span class="s2">&quot;/index.html&quot;</span><span class="p">,</span>
+
+            <span class="c1">// these two will be done dynamically from the buttons clicked, but are</span>
+            <span class="c1">// needed if you want to use the silent_renew</span>
+            <span class="nx">response_type</span><span class="o">:</span> <span class="s2">&quot;id_token token&quot;</span><span class="p">,</span>
+            <span class="nx">scope</span><span class="o">:</span> <span class="s2">&quot;openid profile email api1 api2&quot;</span><span class="p">,</span>
+
+            <span class="c1">// this will toggle if profile endpoint is used</span>
+            <span class="nx">load_user_profile</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="c1">// silent renew will get a new access_token via an iframe </span>
+            <span class="c1">// just prior to the old access_token expiring (60 seconds prior)</span>
+            <span class="nx">silent_redirect_uri</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">+</span> <span class="s2">&quot;/silent_renew.html&quot;</span><span class="p">,</span>
+            <span class="nx">silent_renew</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+            <span class="c1">// this will allow all the OIDC protocol claims to be visible in the window. normally a client app </span>
+            <span class="c1">// wouldn&#39;t care about them or want them taking up space</span>
+            <span class="nx">filter_protocol_claims</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">};</span>
+
+        <span class="kd">var</span> <span class="nx">mgr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OidcTokenManager</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="p">{</span> <span class="nx">OidcTokenManager</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">mgr</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+
+    <span class="p">}</span>
+</pre></div>
+</p>
+
+<p>Then we create the page that will handle the call back from identity server it will store the token in localStorage.</p>
+
+<p><div class="highlight"><pre> 
+    <span class="cp">&lt;!DOCTYPE html&gt;</span>
+    <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;&lt;/title&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/bower_components/oidc-token-manager/dist/oidc-token-manager.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">authority</span><span class="o">:</span> <span class="s2">&quot;http://localhost:22530/&quot;</span><span class="p">,</span>
+            <span class="nx">client_id</span><span class="o">:</span> <span class="s2">&quot;js_oidc&quot;</span><span class="p">,</span>
+            <span class="nx">redirect_uri</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">+</span> <span class="s2">&quot;/index.html&quot;</span>
+        <span class="p">};</span>
+    
+        <span class="kd">var</span> <span class="nx">mgr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OidcTokenManager</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    
+        <span class="nx">mgr</span><span class="p">.</span><span class="nx">processTokenCallbackAsync</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span><span class="p">;</span>
+        <span class="p">},</span>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;There was a problem getting the Token: &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">));</span>
+            <span class="p">});</span>
+    
+    <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+ 
+</pre></div>
+</p>
+
+<p>Finally we need to make sure that any calls sent to the server have the token added as a authentication header.
+  <div class="highlight"><pre>    <span class="nx">angular</span>
+       <span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;app.core&#39;</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;oidcInterceptor&#39;</span><span class="p">,</span> <span class="nx">oidcInterceptor</span><span class="p">);</span>
+    <span class="cm">/* @ngInject */</span>
+    <span class="kd">function</span> <span class="nx">oidcInterceptor</span><span class="p">(</span><span class="nx">globalConfig</span><span class="p">,</span> <span class="nx">authService</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;request&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">globalConfig</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">Authorization</span> <span class="o">=</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">authService</span><span class="p">.</span><span class="nx">OidcTokenManager</span><span class="p">().</span><span class="nx">access_token</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="nx">config</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</p>
+
+<p>The full code is available on github.</p>
+
+        </article>
+      </div>
+      <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+        <section class="social aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">
+    Follow me!
+  </h1>
+  <ul class="unstyled">
+  
+    <li><a class="twitter" href="//twitter.com/estynedwards"><i class="icon-twitter"></i> Twitter</a></li>
+    <li><a class="github" href="//github.com/estyn"><i class="icon-github"></i> Github</a></li>
+    
+  </ul>
+</section>
+<section id="recent-posts" class="aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">Recent Posts</h1>
+  <ul class="divided">
+    
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2016/01/30/SeriveStack-IdentityServer-Angular/">Using IdentityServer 4 with ServiceStack and Angular</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/">Using a JQuery Plugin in Angular 2</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2014/01/15/using-geny-motion-for-xamarin-android-development-in-a-vm/">Using Geny Motion for Xamarin Android Development in a VM</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2013/12/12/better-logging-in-azure-mobile-services/">Better Logging in Azure Mobile Services</a>
+		
+      </li>
+	
+	 <li class="post">
+        <a href="http://estynedwards.com/blog/2013/09/06/azure-dev-machine-auto-shutdown-part-2/">Azure Dev Machine Auto Shutdown Part 2</a>
+		
+      </li>
+	
+  
+    
+  </ul>
+</section>
+      </aside>
+
+    </div>
+     <h1 class="indent title">Comments</h1>
+<section id="comments">
+  <div id="disqus_thread" class="post-comments"></div>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    (function() {
+    
+    
+   if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'estyn';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+  </div>
+ 
+  <footer>
+    <footer>
+	<div class="grid-wrapper">
+		<div class="grid">
+			<div class="grid__item">
+				<p class="copyright">
+					All content by Estyn Edwards and licenced under <a href="//creativecommons.org/licenses/by-nc-sa/3.0/ie/">Creative Commons</a>.
+					<br> Code under <a href="https://opensource.org/licenses/MIT">MIT Licence</a>.
+				</p>
+			</div>
+		</div>
+	</div>
+
+</footer>
+  </footer>
+
+  
+
+</body>
+
+</html>
