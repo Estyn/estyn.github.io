@@ -85,7 +85,9 @@
                 <ul class="tags unstyled">
                   
                   <i class="fa fa-tag"></i> 
-                  <li><a href="/categories/Angluar%20ServiceStack/">Angluar ServiceStack</a></li>
+                  <li><a href="/categories/Angluar/">Angluar</a></li>
+                  
+                  <li><a href="/categories/ServiceStack/">ServiceStack</a></li>
                    
                 </ul>
               </div>
@@ -93,22 +95,13 @@
           </header>
           
   
-asds
-
-Estyn Edwards
-
-estyn
-
-estyn
-
-estynedwards
 
           
           
 
 <p>We&rsquo;ve looking to use a custom OAuth/OpenID provider for a few of our projects and after reviewing the options available we decided to use Identity Server as it looked to be the most stable and feature rich.  Currently we use ServiceStack for our backend and while ServiceStack has build in support for OAuth and OpenID it doesn&rsquo;t appear to have any support for OpenId Connect.  And while we will be using OAuth tokens we will be using the OpenId Connect configuration endpoints for configuration.</p>
 
-<h1 id="step-1-setup-identity-server:2de7eaf0e63123158caf7bb21beed240">Step 1: Setup Identity Server</h1>
+<h1 id="step-1-setup-identity-server:0c891f9681739990127d39f58407d9b9">Step 1: Setup Identity Server</h1>
 
 <p>I&rsquo;m not going to go into too much detail here as there are plenty of good tutorials and blog posts on how to setup identity server already.  We chose to go with Identity Server 4 as it runs on asp.net core.</p>
 
@@ -195,7 +188,7 @@ estynedwards
 </pre></div>
 </p>
 
-<h1 id="step-2-create-a-custom-authprovider-for-servicestack:2de7eaf0e63123158caf7bb21beed240">Step 2: Create a custom authprovider for ServiceStack</h1>
+<h1 id="step-2-create-a-custom-authprovider-for-servicestack:0c891f9681739990127d39f58407d9b9">Step 2: Create a custom authprovider for ServiceStack</h1>
 
 <p>Next we created a custom Authentication Provider for Service Stack.  We plan on using the code in several different project so we&rsquo;d like the amount of configuration neccessary to use the provider to be minimal.  Luckily OpenID Connect provieds a discovery endpoint that can be used to retrieve the configuration from the server (including the public certificate).</p>
 
@@ -395,7 +388,7 @@ estynedwards
 
 <p>At this point we can use a tool like postman to send authenticated requests to service stack and out provider will correctly authorize the user.  While we are targetting access_tokens you can also validate the id_token if you pass that in instead, although that wouldn&rsquo;t really make a lot of sense unless all you are trying to do is authenticate the user.</p>
 
-<h1 id="step-3-angular:2de7eaf0e63123158caf7bb21beed240">Step 3 Angular</h1>
+<h1 id="step-3-angular:0c891f9681739990127d39f58407d9b9">Step 3 Angular</h1>
 
 <p>For angular we will use the OidcTokenManager library to handle the authentications flows.  All we need to do is hook the library up in a few places and ensure that we are passing the token on all calls to the server.</p>
 
@@ -513,7 +506,7 @@ estynedwards
   <ul class="divided">
     
 	 <li class="post">
-        <a href="http://estynedwards.com/blog/2016/01/30/SeriveStack-IdentityServer-Angular/">Using IdentityServer 4 with ServiceStack and Angular</a>
+        <a href="http://estynedwards.com/blog/2016/01/30/ServiceStack-IdentityServer-Angular/">Using IdentityServer 4 with ServiceStack and Angular</a>
 		
       </li>
 	

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Angluar Servicestack on Estyn&#39;s Blog</title>
-    <link>http://localhost:1313/categories/angluar-servicestack/</link>
-    <description>Recent content in Angluar Servicestack on Estyn&#39;s Blog</description>
+    <title>Angluar on Estyn&#39;s Blog</title>
+    <link>http://estynedwards.com/categories/angluar/</link>
+    <description>Recent content in Angluar on Estyn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 30 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/angluar-servicestack/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://estynedwards.com/categories/angluar/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using IdentityServer 4 with ServiceStack and Angular</title>
-      <link>http://localhost:1313/blog/2016/01/30/SeriveStack-IdentityServer-Angular/</link>
+      <link>http://estynedwards.com/blog/2016/01/30/ServiceStack-IdentityServer-Angular/</link>
       <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/2016/01/30/SeriveStack-IdentityServer-Angular/</guid>
+      <guid>http://estynedwards.com/blog/2016/01/30/ServiceStack-IdentityServer-Angular/</guid>
       <description>
 
 &lt;p&gt;We&amp;rsquo;ve looking to use a custom OAuth/OpenID provider for a few of our projects and after reviewing the options available we decided to use Identity Server as it looked to be the most stable and feature rich.  Currently we use ServiceStack for our backend and while ServiceStack has build in support for OAuth and OpenID it doesn&amp;rsquo;t appear to have any support for OpenId Connect.  And while we will be using OAuth tokens we will be using the OpenId Connect configuration endpoints for configuration.&lt;/p&gt;
 
-&lt;h1 id=&#34;step-1-setup-identity-server:2de7eaf0e63123158caf7bb21beed240&#34;&gt;Step 1: Setup Identity Server&lt;/h1&gt;
+&lt;h1 id=&#34;step-1-setup-identity-server:0c891f9681739990127d39f58407d9b9&#34;&gt;Step 1: Setup Identity Server&lt;/h1&gt;
 
 &lt;p&gt;I&amp;rsquo;m not going to go into too much detail here as there are plenty of good tutorials and blog posts on how to setup identity server already.  We chose to go with Identity Server 4 as it runs on asp.net core.&lt;/p&gt;
 
@@ -106,7 +106,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
-&lt;h1 id=&#34;step-2-create-a-custom-authprovider-for-servicestack:2de7eaf0e63123158caf7bb21beed240&#34;&gt;Step 2: Create a custom authprovider for ServiceStack&lt;/h1&gt;
+&lt;h1 id=&#34;step-2-create-a-custom-authprovider-for-servicestack:0c891f9681739990127d39f58407d9b9&#34;&gt;Step 2: Create a custom authprovider for ServiceStack&lt;/h1&gt;
 
 &lt;p&gt;Next we created a custom Authentication Provider for Service Stack.  We plan on using the code in several different project so we&amp;rsquo;d like the amount of configuration neccessary to use the provider to be minimal.  Luckily OpenID Connect provieds a discovery endpoint that can be used to retrieve the configuration from the server (including the public certificate).&lt;/p&gt;
 
@@ -306,7 +306,7 @@
 
 &lt;p&gt;At this point we can use a tool like postman to send authenticated requests to service stack and out provider will correctly authorize the user.  While we are targetting access_tokens you can also validate the id_token if you pass that in instead, although that wouldn&amp;rsquo;t really make a lot of sense unless all you are trying to do is authenticate the user.&lt;/p&gt;
 
-&lt;h1 id=&#34;step-3-angular:2de7eaf0e63123158caf7bb21beed240&#34;&gt;Step 3 Angular&lt;/h1&gt;
+&lt;h1 id=&#34;step-3-angular:0c891f9681739990127d39f58407d9b9&#34;&gt;Step 3 Angular&lt;/h1&gt;
 
 &lt;p&gt;For angular we will use the OidcTokenManager library to handle the authentications flows.  All we need to do is hook the library up in a few places and ensure that we are passing the token on all calls to the server.&lt;/p&gt;
 
@@ -404,6 +404,71 @@
 &lt;/p&gt;
 
 &lt;p&gt;The full code is available on &lt;a href=&#34;https://github.com/Estyn/ServiceStackJWT&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using a JQuery Plugin in Angular 2</title>
+      <link>http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/</link>
+      <pubDate>Fri, 04 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://estynedwards.com/blog/2015/12/04/getting%20started%20with%20angular%202/</guid>
+      <description>&lt;p&gt;I have been working on a small content editing tool for an internal project and decided to try using angular 2.  For this project I want to use the TinyMCE.js.  In anglar 1.x I would wrap it in a directive and work with it that way.&lt;/p&gt;
+
+&lt;aside class=&#34;notice&#34;&gt;
+This code was testing with alpha 48
+&lt;/aside&gt;
+
+&lt;p&gt;In angular 2.0 there are no directives, instead we use a component which ends up being much simpler than a directive.  The full code is below folled by a brief explaination.&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Component&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;View&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ElementRef&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;OnInit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Output&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;EventEmitter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;OnChanges&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;angular2/angular2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;declare&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tinymce&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Component&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;selector&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;tiny-editor&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;View&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;template&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;textarea&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;tinyMCE&amp;quot;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;height:300px&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;/textarea&amp;gt;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;TinyEditor&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;OnInit&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;err&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;value&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;err&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Output&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;valueChange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;EventEmitter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+
+    &lt;span class=&#34;nx&#34;&gt;elementRef&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;ElementRef&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;constructor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;elementRef&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;ElementRef&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;elementRef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;elementRef&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;onInit() {&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;that&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;tinymce&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;selector&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.tinyMCE&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;plugins&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;code&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;menubar&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;toolbar1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect   bullist numlist outdent indent blockquote undo redo removeformat subscript superscript | code&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;setup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;editor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		  &lt;span class=&#34;nx&#34;&gt;editor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;change&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		      &lt;span class=&#34;nx&#34;&gt;that&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;valueChange&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;editor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getContent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;
+		  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+	   &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;onChanges&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;changes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;tinymce&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;activeEditor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;tinymce&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;activeEditor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;setContent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+With the tinyMCE component we want to have two way binding for the text in the editor.  In order to do this we need to use Input (with OnChanges) and Output (with EventEmmiter).&lt;/p&gt;
+
+&lt;p&gt;Usage:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;tiny-editor&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;]=&amp;quot;&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;model&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;value-change&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;)=&amp;quot;&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;model&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;data=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$event&amp;quot;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&amp;lt;/tiny-editor&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+In order to make sure that the editor updates when the text changes we implement the onChanges event which will fire everytime any of the inputs changes.  In this case we only have one input so we can update the editor everytime there is a change.&lt;/p&gt;
+
+&lt;p&gt;Updating the model when there is a change in the editor is a little bit more complicated, in order to do this we use an event emmitter. We setup tinyMCE&amp;rsquo;s change event to call &amp;lsquo;next&amp;rsquo; on our event emitter to allow us bind the new data back to the model.&lt;/p&gt;
 </description>
     </item>
     
