@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mobile on Estyn&#39;s Blog</title>
+    <link>http://estynedwards.com/categories/mobile/</link>
+    <description>Recent content in Mobile on Estyn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://estynedwards.com/categories/mobile/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>EPark</title>
+      <link>http://estynedwards.com/blog/2016/02/29/Epark-part1/</link>
+      <pubDate>Mon, 29 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://estynedwards.com/blog/2016/02/29/Epark-part1/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;Part 1 - EPark&lt;/li&gt;
+&lt;li&gt;Part 2 - EPark Rebuilt (Coming Soon)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The City of Edmonton has removed all the parking meters and replaced them with an electronic parking system called EPark.  The EPark system allows you to pay at either a kiosk or through your mobile phone, which sounds awesome until you try to use the mobile app. EPark is an example of an application that had no usability testing done and very little thought put in to how users will use the application, which explains it&amp;rsquo;s one star ratting in the app store. In this post we will investigate some of the issues, in part two we will look at some solutions.&lt;/p&gt;
+
+&lt;h1 id=&#34;login-screen:92b37e91336f08c8446f4bf574729975&#34;&gt;Login Screen&lt;/h1&gt;
+
+&lt;p&gt;Login screens are very common in both mobile and web applications and the layout of a login screen is fairly standard. Login screens are a solved problem, they consisting of a user name, password and login button.  EPark almost does this right, but in addition to having a login button it has a reset button and bizarrely it places the reset button first.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../login.png&#34; width=250/&gt;&lt;/p&gt;
+
+&lt;p&gt;In fact the login button doesn&amp;rsquo;t show up on many mobile devices without scrolling making the login process particularly confusing.  The reset button is completely unnecessary and I would argue that the remember username is also not needed.  Simplifying the user interface would make login in easier for users.&lt;/p&gt;
+
+&lt;h1 id=&#34;user-onboarding:92b37e91336f08c8446f4bf574729975&#34;&gt;User Onboarding&lt;/h1&gt;
+
+&lt;p&gt;The create account link creates a modal dialog which is generally a bad idea on mobile, and is a particularly bad choice when it is long enough to require scrolling.  In this case a dedicated screen would be a better choice.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../phone1.png&#34; width=250/&gt;
+&lt;img src=&#34;../phone2.png&#34; width=250/&gt;&lt;/p&gt;
+
+&lt;p&gt;The sign-up process doesn&amp;rsquo;t prompt the user to add a mobile number or a license plate which is unfortunate as they are both required to use the system.  I would rather see a wizard that would walk the user through the account creation process.&lt;/p&gt;
+
+&lt;h1 id=&#34;mobile-number-account-confusion:92b37e91336f08c8446f4bf574729975&#34;&gt;Mobile Number / Account Confusion&lt;/h1&gt;
+
+&lt;p&gt;I have a hard time understanding why the system allows multiple mobile numbers the way they do.  The mobile number also include settings around when to send reminders (even email reminders).  It&amp;rsquo;s good that these settings exist, but it would make a lot more sense for these to exist on an account basis not a per number basis. The majority of users will have a single phone number and for those users that have multiple numbers it seems likely that they will want the same notification rules on both numbers.&lt;/p&gt;
+
+&lt;p&gt;It seems like they are using phone number to allow multiple users to share they same account, perhaps for business use, but this means that all the users sharing the account will share the same user name and password and will have permission to edit the other users. A better implementation would allow for separate user accounts that could share the same funds and have an administrator who could manage the overall account.&lt;/p&gt;
+
+&lt;h1 id=&#34;license-plate:92b37e91336f08c8446f4bf574729975&#34;&gt;License Plate&lt;/h1&gt;
+
+&lt;p&gt;The license plate entry is thankfully fairly straight forward, although the small vehicle promotion is problematic.  The only additional confusion is the fact that license plates must be globally unique.  This means that if a couple has two cars they cannot both have both cars on their accounts.  It also means that I could in theory register someone elses car and prevent them from using the system.&lt;/p&gt;
+
+&lt;h2 id=&#34;small-vehicle-promotion:92b37e91336f08c8446f4bf574729975&#34;&gt;Small Vehicle Promotion&lt;/h2&gt;
+
+&lt;p&gt;If a vehicle is under a certain size it qualifies for a discount, unfortunately they do not say what size that is. If you try to save a vehicle with a size that is too large they display and error message, but frustratingly the error message also doesn&amp;rsquo;t display the size that is required. The only way to find out what size is required is to click on the question mark next to the promotion which then popups a non-dismissible modal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../small vehicle.png&#34; width=250/&gt;&lt;/p&gt;
+
+&lt;p&gt;An additional frustration around the small vehicle discount is that the field is disabled if you have more than one license plate.  There is no indication in the UI why the field is disabled, but if you have more than one license plate you cannot edit the field.  I though the app was broken until I read the documentation.&lt;/p&gt;
+
+&lt;h1 id=&#34;ui-improvements:92b37e91336f08c8446f4bf574729975&#34;&gt;UI Improvements&lt;/h1&gt;
+
+&lt;p&gt;There are several places where small changes to the UI could lead to significant improvements, currently the app feels unfinished.&lt;/p&gt;
+
+&lt;h3 id=&#34;error-message-text:92b37e91336f08c8446f4bf574729975&#34;&gt;Error Message Text&lt;/h3&gt;
+
+&lt;p&gt;This is the problem that sparked this blog post.  When I was trying to start a session and I kept getting the following error message:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Could not activate your session; an invalid phone number was supplied.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After much frustration it turns out that my license plate was incorrect, not my phone number.  The error message makes no sense and was clearly not tested properly. It&amp;rsquo;s particularly frustrating as the phone number is displaced right on the screen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../invalid phone number.png&#34; width=250/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;error-messages:92b37e91336f08c8446f4bf574729975&#34;&gt;Error Messages&lt;/h3&gt;
+
+&lt;p&gt;The error messages popup over the UI and there isn&amp;rsquo;t any way to dismiss them or access the UI underneath them.  They do eventually disappear (after 20 or so seconds), but not before confusing and frustrating the user.&lt;/p&gt;
+
+&lt;h3 id=&#34;logo:92b37e91336f08c8446f4bf574729975&#34;&gt;Logo&lt;/h3&gt;
+
+&lt;p&gt;This feels a little nitpicky, but why is the EPark logo fuzzy?  Could they not use a photo with the proper resolution?&lt;/p&gt;
+
+&lt;h3 id=&#34;workflow:92b37e91336f08c8446f4bf574729975&#34;&gt;Workflow&lt;/h3&gt;
+
+&lt;p&gt;If an account has only one mobile number and license plate then we can stream line the process to avoid prompting for this information.&lt;/p&gt;
+
+&lt;h3 id=&#34;zoom:92b37e91336f08c8446f4bf574729975&#34;&gt;Zoom&lt;/h3&gt;
+
+&lt;p&gt;If you accidentally pinch or double-click in the UI it zooms in like a webpage. It is quite confusing and serves no purpose.  This can (and should) be disabled in mobile apps that are acting as native apps.&lt;/p&gt;
+
+&lt;h3 id=&#34;dialogs:92b37e91336f08c8446f4bf574729975&#34;&gt;Dialogs&lt;/h3&gt;
+
+&lt;p&gt;When you start a session the dialog message title is &amp;ldquo;startstop.html&amp;rdquo; not only is that not useful to users it is incredibly sloppy.
+&lt;img src=&#34;../bad dialog.png&#34; width=250/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
