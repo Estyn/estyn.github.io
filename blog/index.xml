@@ -22,7 +22,7 @@
 &lt;h1 id=&#34;key-take-aways:677625b794d2b5469be210d3c913a38a&#34;&gt;Key Take aways&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Angular 2 is going to be fast&lt;/p&gt;
+&lt;li&gt;Angular 2 is going to be fast
 
 &lt;ul&gt;
 &lt;li&gt;The RC file size has been reduced from 170k to 50k.&lt;br /&gt;&lt;/li&gt;
@@ -31,8 +31,7 @@
 &lt;li&gt;Angular Universal will allow pre-rendering of angular sites on the server (supports Node and asp.net via node)&lt;/li&gt;
 &lt;li&gt;Angular 2 change detection is fast!&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Angular 2 is going to be everywhere&lt;/p&gt;
+&lt;li&gt;Angular 2 is going to be everywhere
 
 &lt;ul&gt;
 &lt;li&gt;Technologies like ionic and native script will allow angular 2 to run on mobile devices&lt;/li&gt;
@@ -40,15 +39,13 @@
 &lt;li&gt;Angular Universal will allow angular to run on the server&lt;/li&gt;
 &lt;li&gt;Desktop apps can be created with Electron and Angular 2&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Angular 2 is going to have a huge ecosystem&lt;/p&gt;
+&lt;li&gt;Angular 2 is going to have a huge ecosystem
 
 &lt;ul&gt;
 &lt;li&gt;Angular Material is going to provide a rich UI component suite&lt;/li&gt;
 &lt;li&gt;3rd Party components are coming (&lt;a href=&#34;http://wijmo.com/angular2/&#34;&gt;Wijimo&lt;/a&gt;, &lt;a href=&#34;https://vaadin.com/vaadin-documentation-portlet/elements/integrations/angular2.html&#34;&gt;Vaadin&lt;/a&gt;, &lt;a href=&#34;http://demos.telerik.com/kendo-ui/integration/angular2&#34;&gt;Kendo&lt;/a&gt;, &lt;a href=&#34;https://github.com/ng-bootstrap/core&#34;&gt;Ng-bootstrap&lt;/a&gt; and others)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;TypeScript all the things&lt;/p&gt;
+&lt;li&gt;TypeScript all the things
 
 &lt;ul&gt;
 &lt;li&gt;TypeScript is going to be the best way to write angular code&lt;/li&gt;
