@@ -6,8 +6,70 @@
     <description>Recent content in Blogs on Estyn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 May 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://estynedwards.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ng-conf 2016</title>
+      <link>http://estynedwards.com/blog/2016/05/17/NGConf/</link>
+      <pubDate>Tue, 17 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://estynedwards.com/blog/2016/05/17/NGConf/</guid>
+      <description>
+
+&lt;p&gt;I was lucky enough to get a ticket to ng-cong in Salt Lake City this year.  It was a great conference, much different from the tech conferences that I&amp;rsquo;m used to.&lt;/p&gt;
+
+&lt;h1 id=&#34;key-take-aways:677625b794d2b5469be210d3c913a38a&#34;&gt;Key Take aways&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Angular 2 is going to be fast&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The RC file size has been reduced from 170k to 50k.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Angular CLI will support pre-compilation of templates which will help with both file size and time to initial load.&lt;/li&gt;
+&lt;li&gt;Lazy loading on routes will further help with load times&lt;/li&gt;
+&lt;li&gt;Angular Universal will allow pre-rendering of angular sites on the server (supports Node and asp.net via node)&lt;/li&gt;
+&lt;li&gt;Angular 2 change detection is fast!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Angular 2 is going to be everywhere&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Technologies like ionic and native script will allow angular 2 to run on mobile devices&lt;/li&gt;
+&lt;li&gt;Mobile.angular.io  provides tooling for better progressive web applications&lt;/li&gt;
+&lt;li&gt;Angular Universal will allow angular to run on the server&lt;/li&gt;
+&lt;li&gt;Desktop apps can be created with Electron and Angular 2&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Angular 2 is going to have a huge ecosystem&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Angular Material is going to provide a rich UI component suite&lt;/li&gt;
+&lt;li&gt;3rd Party components are coming (&lt;a href=&#34;http://wijmo.com/angular2/&#34;&gt;Wijimo&lt;/a&gt;, &lt;a href=&#34;https://vaadin.com/vaadin-documentation-portlet/elements/integrations/angular2.html&#34;&gt;Vaadin&lt;/a&gt;, &lt;a href=&#34;http://demos.telerik.com/kendo-ui/integration/angular2&#34;&gt;Kendo&lt;/a&gt;, &lt;a href=&#34;https://github.com/ng-bootstrap/core&#34;&gt;Ng-bootstrap&lt;/a&gt; and others)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;TypeScript all the things&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;TypeScript is going to be the best way to write angular code&lt;/li&gt;
+&lt;li&gt;Consider using TypeScript for any js code&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;tips:677625b794d2b5469be210d3c913a38a&#34;&gt;Tips&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Talk with fellow attendees, some of the best information you will get will be from other attendees&lt;/li&gt;
+&lt;li&gt;Pre-download workshop files the wi-fi doesn&amp;rsquo;t handle 100 npm install at once very well&lt;/li&gt;
+&lt;li&gt;Go early or late for food avoid the lines&lt;/li&gt;
+&lt;li&gt;I found it interesting that most presenters were using a Macbook Pro (Apple), angular (Google) and VScode and typescript (Microsoft).  It&amp;rsquo;s nice to see everyone playing nice together.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;conclusion:677625b794d2b5469be210d3c913a38a&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Overall I thought this was a very well run conference, my only negative feedback would be that a few of the talks seemed to be duplicating content which doesn&amp;rsquo;t really make sense in a single track conference.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>EPark</title>
