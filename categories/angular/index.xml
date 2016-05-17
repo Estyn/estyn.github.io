@@ -35,10 +35,13 @@
 &lt;li&gt;&lt;p&gt;Angular 2 is going to be everywhere&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Technologies like ionic and native script will allow angular 2 to run on mobile devices&lt;/li&gt;
-&lt;li&gt;Mobile.angular.io  provides tooling for better progressive web applications&lt;/li&gt;
-&lt;li&gt;Angular Universal will allow angular to run on the server&lt;/li&gt;
-&lt;li&gt;Desktop apps can be created with Electron and Angular 2&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Technologies like ionic and native script will allow angular 2 to run on mobile devices&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Mobile.angular.io  provides tooling for better progressive web applications&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Angular Universal will allow angular to run on the server&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Desktop apps can be created with Electron and Angular 2&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Angular 2 is going to have a huge ecosystem&lt;/p&gt;
