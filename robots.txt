@@ -1,4 +1,5 @@
-User-agent: *
-Disallow: 
 
-Sitemap: http://Estyn.github.io/sitemap.xml 
+User-agent: *
+Allow: /
+
+Sitemap: https://estynedwards.com/sitemap-index.xml
